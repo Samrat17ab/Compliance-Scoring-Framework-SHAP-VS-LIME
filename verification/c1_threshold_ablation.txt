@@ -1,0 +1,24 @@
+SHAP C1 raw = 0.7, LIME C1 raw = 0.251
+   shift  SHAP score  LIME score  SHAP>LIME
+    -40%         5.0         1.5       True
+    -30%         5.0         1.5       True
+    -20%         4.0         1.5       True
+    -15%         4.0         1.5       True
+    -10%         3.0         1.5       True
+     -5%         3.0         1.5       True
+     -1%         3.0         1.5       True
+      0%         3.0         1.5       True
+      1%         2.0         1.5       True
+      5%         2.0         1.5       True
+     10%         2.0         1.5       True
+     15%         2.0         1.5       True
+     20%         1.0         1.5      False
+     30%         1.0         1.5      False
+     40%         1.0         1.5      False
+
+SHAP coverage score drops from 3.0->2.0 at shift = 0.00%
+SHAP coverage score drops from 2.0->1.0 at shift = 16.67%
+LIME R^2 score would rise from 1.5->2.0 only if the Score-2 cutoff shifted by -54.36% (i.e. cutoff would need to drop to 0.251, essentially to LIME's own value)
+
+--- Joint worst case: how far can thresholds shift before ranking flips? ---
+Ranking FLIPS (SHAP <= LIME) first at shift = 17%  (SHAP=1.0, LIME=1.5)

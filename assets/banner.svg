@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="360" viewBox="0 0 1400 360" role="img" aria-labelledby="title desc">
+  <title id="title">Compliance Scoring Framework: SHAP VS LIME</title>
+  <desc id="desc">A research companion connecting explanation methods, scoring criteria, and reproducible evidence.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1629"/><stop offset="1" stop-color="#142f46"/></linearGradient></defs>
+  <rect width="1400" height="360" rx="18" fill="url(#bg)"/>
+  <path d="M1030 0v360M1130 0v360M1230 0v360M1330 0v360M950 80h450M950 180h450M950 280h450" stroke="#31536c" opacity=".28"/>
+  <rect x="60" y="50" width="5" height="260" rx="2" fill="#53d5c5"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="90" y="84" fill="#76e0d3" font-size="17" letter-spacing="4">EXPLAINABLE AI · CREDIT SCORING</text>
+    <text x="87" y="146" fill="#ffffff" font-size="43" font-weight="700">Compliance Scoring Framework</text>
+    <text x="90" y="211" fill="#ffffff" font-size="49" font-weight="700">SHAP <tspan fill="#6e91aa" font-size="30">VS</tspan> LIME</text>
+    <text x="91" y="264" fill="#b4c9d9" font-size="20">Manuscript · Code · Experiments · Verifiable evidence</text>
+    <text x="91" y="309" fill="#83a3bb" font-size="16">Samrat Lamsal · Sumana De · Sulav Poudel</text>
+    <g transform="translate(1080 90)">
+      <rect width="250" height="52" rx="9" fill="#173f53" stroke="#53d5c5"/>
+      <text x="125" y="33" text-anchor="middle" font-size="18" fill="#d5fff7">Explanation</text>
+      <path d="M125 53v23" stroke="#86b5c7" stroke-width="2"/>
+      <rect y="78" width="250" height="52" rx="9" fill="#203b53" stroke="#729ab9"/>
+      <text x="125" y="111" text-anchor="middle" font-size="18" fill="#e0effc">Measurement</text>
+      <path d="M125 131v23" stroke="#86b5c7" stroke-width="2"/>
+      <rect y="156" width="250" height="52" rx="9" fill="#304052" stroke="#d9a970"/>
+      <text x="125" y="189" text-anchor="middle" font-size="18" fill="#ffdfb6">Evidence</text>
+    </g>
+  </g>
+</svg>

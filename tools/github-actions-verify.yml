@@ -1,0 +1,27 @@
+name: Verify research artifacts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install verification dependencies
+        run: python -m pip install -r requirements-verify.txt
+      - name: Verify saved models, explanations, statistics, and manuscript
+        run: python -m unittest discover -s tests -v
+      - name: Run original threshold checks
+        run: |
+          python c1_threshold_ablation.py
+          python c1_ablation_recheck.py

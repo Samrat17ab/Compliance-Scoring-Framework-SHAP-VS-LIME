@@ -1,0 +1,34 @@
+# Local environments and caches
+.venv/
+.uv-cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+tmp/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+kaggle.json
+
+# Source data and full train/validation/test exports
+application_train.csv
+application_test.csv
+X_train.csv
+X_val.csv
+X_test.csv
+y_train.csv
+y_val.csv
+y_test.csv
+
+# Internal executable checkpoints and duplicate generated bundles
+*.pkl
+*.pickle
+*.zip
+*.aux
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz

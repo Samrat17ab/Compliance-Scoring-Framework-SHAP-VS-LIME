@@ -1,0 +1,57 @@
+# Full-sample results: C3b and C6
+
+N = 1,000 applicants; 10 features per method per applicant; 10,000 explanation items per method.
+
+Paper explainer settings with shared median-filled inputs. Newly computed with the existing retrained paper-settings model; no sensitivity variants.
+
+## Part A — C6 proxies
+
+- SHAP maximum absolute reconstruction error: **7.9936057773e-15 log-odds**.
+- LIME absolute surrogate gap, mean: **0.087879635**; median: **0.069145919**; 90th percentile: **0.188666464**, all in model probability-scale units.
+- LIME bin/range items: **10000/10,000 (100.00%)**; SHAP bin/range labels: **0%**, exact model-input value labels: **100%**.
+- These are representation and numerical-accounting proxies. Neither method proves causal actionability. SHAP and LIME error scales differ.
+
+## Part B — C3b content proxies
+
+| Category | SHAP mean % of top ten | LIME mean % of top ten | SHAP item count | LIME item count |
+|---|---:|---:|---:|---:|
+| document_flags | 1.48% | 46.45% | 148 | 4645 |
+| encoded_categoricals | 16.54% | 11.78% | 1654 | 1178 |
+| opaque_scores | 26.36% | 21.95% | 2636 | 2195 |
+| plain_meaning | 46.75% | 16.93% | 4675 | 1693 |
+| other | 8.87% | 2.89% | 887 | 289 |
+
+| Instance measure | SHAP | LIME |
+|---|---:|---:|
+| At least 5 document flags / encoded categoricals | 0.20% (2/1,000) | 87.00% (870/1,000) |
+| CODE_GENDER in top ten | 80.90% (809/1,000) | 9.70% (97/1,000) |
+
+Label-encoded columns (16):
+
+- `NAME_CONTRACT_TYPE`
+- `CODE_GENDER`
+- `FLAG_OWN_CAR`
+- `FLAG_OWN_REALTY`
+- `NAME_TYPE_SUITE`
+- `NAME_INCOME_TYPE`
+- `NAME_EDUCATION_TYPE`
+- `NAME_FAMILY_STATUS`
+- `NAME_HOUSING_TYPE`
+- `OCCUPATION_TYPE`
+- `WEEKDAY_APPR_PROCESS_START`
+- `ORGANIZATION_TYPE`
+- `FONDKAPREMONT_MODE`
+- `HOUSETYPE_MODE`
+- `WALLSMATERIAL_MODE`
+- `EMERGENCYSTATE_MODE`
+
+## Part C — Selected examples
+
+Within each predicted class (score < 0.5 accepted; >= 0.5 rejected), select the applicant minimizing absolute distance from that class median LIME R²; ties resolved by earliest position in the original seed-42 sample. No further exclusions.
+
+| Class | ID | Group n | Score | Class median R² | Selected R² | Distance |
+|---|---:|---:|---:|---:|---:|---:|
+| accepted | 140663 | 825 | 0.358542811 | 0.201396261 | 0.201396261 | 0 |
+| rejected | 296065 | 175 | 0.573612601 | 0.405237841 | 0.405237841 | 0 |
+
+See README.md for category definitions, model provenance, configuration, and interpretation limits. The JSON preserves unrounded numbers.

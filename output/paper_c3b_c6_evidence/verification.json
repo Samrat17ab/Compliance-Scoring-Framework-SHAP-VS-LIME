@@ -1,0 +1,11 @@
+{
+  "n": 1000,
+  "items_per_method": 10000,
+  "all_aggregates_recomputed": true,
+  "sample_ids_unique": true,
+  "median_selection_verified": true,
+  "png_dimensions": [
+    3200,
+    1800
+  ]
+}

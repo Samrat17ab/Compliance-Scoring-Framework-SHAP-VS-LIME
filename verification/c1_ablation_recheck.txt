@@ -1,0 +1,18 @@
+Sanity check passed: shift=0 reproduces SHAP=3.0, LIME=1.5 (matches Table V).
+
+--- Joint shift (both tables shifted together), re-implemented independently ---
+Joint-shift ranking flips at +17% (independent re-implementation)
+
+--- Coverage-only shift (R^2 table held at original thresholds) ---
+Coverage-only shift: ranking flips at +17%
+
+--- R^2-only shift (Coverage table held at original thresholds) ---
+R^2-only shift: ranking flips at shift = -95% (i.e. R^2 thresholds would need to be lowered this much)
+
+--- Exact algebraic break-even points ---
+SHAP coverage 3.0->2.0 break-even: shift = 0.0000%
+SHAP coverage 2.0->1.0 break-even: shift = 16.6667%
+LIME R^2 1.5->2.0 break-even:      shift = -54.3636%
+
+--- Monotonicity check: do cutoffs stay in descending order across tested range? ---
+Order violations found at: none (order preserved throughout)

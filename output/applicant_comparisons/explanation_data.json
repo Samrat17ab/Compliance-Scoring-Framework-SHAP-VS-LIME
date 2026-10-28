@@ -1,0 +1,4734 @@
+{
+  "feature_names": [
+    "NAME_CONTRACT_TYPE",
+    "CODE_GENDER",
+    "FLAG_OWN_CAR",
+    "FLAG_OWN_REALTY",
+    "CNT_CHILDREN",
+    "AMT_INCOME_TOTAL",
+    "AMT_CREDIT",
+    "AMT_ANNUITY",
+    "AMT_GOODS_PRICE",
+    "NAME_TYPE_SUITE",
+    "NAME_INCOME_TYPE",
+    "NAME_EDUCATION_TYPE",
+    "NAME_FAMILY_STATUS",
+    "NAME_HOUSING_TYPE",
+    "REGION_POPULATION_RELATIVE",
+    "DAYS_BIRTH",
+    "DAYS_EMPLOYED",
+    "DAYS_REGISTRATION",
+    "DAYS_ID_PUBLISH",
+    "OWN_CAR_AGE",
+    "FLAG_MOBIL",
+    "FLAG_EMP_PHONE",
+    "FLAG_WORK_PHONE",
+    "FLAG_CONT_MOBILE",
+    "FLAG_PHONE",
+    "FLAG_EMAIL",
+    "OCCUPATION_TYPE",
+    "CNT_FAM_MEMBERS",
+    "REGION_RATING_CLIENT",
+    "REGION_RATING_CLIENT_W_CITY",
+    "WEEKDAY_APPR_PROCESS_START",
+    "HOUR_APPR_PROCESS_START",
+    "REG_REGION_NOT_LIVE_REGION",
+    "REG_REGION_NOT_WORK_REGION",
+    "LIVE_REGION_NOT_WORK_REGION",
+    "REG_CITY_NOT_LIVE_CITY",
+    "REG_CITY_NOT_WORK_CITY",
+    "LIVE_CITY_NOT_WORK_CITY",
+    "ORGANIZATION_TYPE",
+    "EXT_SOURCE_1",
+    "EXT_SOURCE_2",
+    "EXT_SOURCE_3",
+    "APARTMENTS_AVG",
+    "BASEMENTAREA_AVG",
+    "YEARS_BEGINEXPLUATATION_AVG",
+    "YEARS_BUILD_AVG",
+    "COMMONAREA_AVG",
+    "ELEVATORS_AVG",
+    "ENTRANCES_AVG",
+    "FLOORSMAX_AVG",
+    "FLOORSMIN_AVG",
+    "LANDAREA_AVG",
+    "LIVINGAPARTMENTS_AVG",
+    "LIVINGAREA_AVG",
+    "NONLIVINGAPARTMENTS_AVG",
+    "NONLIVINGAREA_AVG",
+    "APARTMENTS_MODE",
+    "BASEMENTAREA_MODE",
+    "YEARS_BEGINEXPLUATATION_MODE",
+    "YEARS_BUILD_MODE",
+    "COMMONAREA_MODE",
+    "ELEVATORS_MODE",
+    "ENTRANCES_MODE",
+    "FLOORSMAX_MODE",
+    "FLOORSMIN_MODE",
+    "LANDAREA_MODE",
+    "LIVINGAPARTMENTS_MODE",
+    "LIVINGAREA_MODE",
+    "NONLIVINGAPARTMENTS_MODE",
+    "NONLIVINGAREA_MODE",
+    "APARTMENTS_MEDI",
+    "BASEMENTAREA_MEDI",
+    "YEARS_BEGINEXPLUATATION_MEDI",
+    "YEARS_BUILD_MEDI",
+    "COMMONAREA_MEDI",
+    "ELEVATORS_MEDI",
+    "ENTRANCES_MEDI",
+    "FLOORSMAX_MEDI",
+    "FLOORSMIN_MEDI",
+    "LANDAREA_MEDI",
+    "LIVINGAPARTMENTS_MEDI",
+    "LIVINGAREA_MEDI",
+    "NONLIVINGAPARTMENTS_MEDI",
+    "NONLIVINGAREA_MEDI",
+    "FONDKAPREMONT_MODE",
+    "HOUSETYPE_MODE",
+    "TOTALAREA_MODE",
+    "WALLSMATERIAL_MODE",
+    "EMERGENCYSTATE_MODE",
+    "OBS_30_CNT_SOCIAL_CIRCLE",
+    "DEF_30_CNT_SOCIAL_CIRCLE",
+    "OBS_60_CNT_SOCIAL_CIRCLE",
+    "DEF_60_CNT_SOCIAL_CIRCLE",
+    "DAYS_LAST_PHONE_CHANGE",
+    "FLAG_DOCUMENT_2",
+    "FLAG_DOCUMENT_3",
+    "FLAG_DOCUMENT_4",
+    "FLAG_DOCUMENT_5",
+    "FLAG_DOCUMENT_6",
+    "FLAG_DOCUMENT_7",
+    "FLAG_DOCUMENT_8",
+    "FLAG_DOCUMENT_9",
+    "FLAG_DOCUMENT_10",
+    "FLAG_DOCUMENT_11",
+    "FLAG_DOCUMENT_12",
+    "FLAG_DOCUMENT_13",
+    "FLAG_DOCUMENT_14",
+    "FLAG_DOCUMENT_15",
+    "FLAG_DOCUMENT_16",
+    "FLAG_DOCUMENT_17",
+    "FLAG_DOCUMENT_18",
+    "FLAG_DOCUMENT_19",
+    "FLAG_DOCUMENT_20",
+    "FLAG_DOCUMENT_21",
+    "AMT_REQ_CREDIT_BUREAU_HOUR",
+    "AMT_REQ_CREDIT_BUREAU_DAY",
+    "AMT_REQ_CREDIT_BUREAU_WEEK",
+    "AMT_REQ_CREDIT_BUREAU_MON",
+    "AMT_REQ_CREDIT_BUREAU_QRT",
+    "AMT_REQ_CREDIT_BUREAU_YEAR"
+  ],
+  "cases": [
+    {
+      "case": "accepted_1",
+      "decision": "accepted",
+      "applicant_id": 209765,
+      "source_row_index": 94529,
+      "csv_line": 94531,
+      "sample_position": 1,
+      "observed_target": 0,
+      "score": 0.2737836699797009,
+      "original_raw_score": 0.4542033628172093,
+      "imputed_features": [
+        "OWN_CAR_AGE",
+        "EXT_SOURCE_3",
+        "YEARS_BUILD_AVG",
+        "COMMONAREA_AVG",
+        "FLOORSMIN_AVG",
+        "LIVINGAPARTMENTS_AVG",
+        "NONLIVINGAPARTMENTS_AVG",
+        "YEARS_BUILD_MODE",
+        "COMMONAREA_MODE",
+        "FLOORSMIN_MODE",
+        "LIVINGAPARTMENTS_MODE",
+        "NONLIVINGAPARTMENTS_MODE",
+        "YEARS_BUILD_MEDI",
+        "COMMONAREA_MEDI",
+        "FLOORSMIN_MEDI",
+        "LIVINGAPARTMENTS_MEDI",
+        "NONLIVINGAPARTMENTS_MEDI",
+        "AMT_REQ_CREDIT_BUREAU_HOUR",
+        "AMT_REQ_CREDIT_BUREAU_DAY",
+        "AMT_REQ_CREDIT_BUREAU_WEEK",
+        "AMT_REQ_CREDIT_BUREAU_MON",
+        "AMT_REQ_CREDIT_BUREAU_QRT",
+        "AMT_REQ_CREDIT_BUREAU_YEAR"
+      ],
+      "input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 0.0,
+        "FLAG_OWN_CAR": 0.0,
+        "FLAG_OWN_REALTY": 0.0,
+        "CNT_CHILDREN": 1.0,
+        "AMT_INCOME_TOTAL": 157500.0,
+        "AMT_CREDIT": 450000.0,
+        "AMT_ANNUITY": 42075.0,
+        "AMT_GOODS_PRICE": 450000.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 1.0,
+        "NAME_EDUCATION_TYPE": 1.0,
+        "NAME_FAMILY_STATUS": 2.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.010147,
+        "DAYS_BIRTH": -11881.0,
+        "DAYS_EMPLOYED": -311.0,
+        "DAYS_REGISTRATION": -10275.0,
+        "DAYS_ID_PUBLISH": -3625.0,
+        "OWN_CAR_AGE": 9.0,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 1.0,
+        "FLAG_WORK_PHONE": 1.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 1.0,
+        "FLAG_EMAIL": 0.0,
+        "OCCUPATION_TYPE": 0.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 0.0,
+        "HOUR_APPR_PROCESS_START": 16.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 0.0,
+        "REG_CITY_NOT_WORK_CITY": 0.0,
+        "LIVE_CITY_NOT_WORK_CITY": 0.0,
+        "ORGANIZATION_TYPE": 5.0,
+        "EXT_SOURCE_1": 0.4132414326270309,
+        "EXT_SOURCE_2": 0.6167044926577011,
+        "EXT_SOURCE_3": 0.5352762504724826,
+        "APARTMENTS_AVG": 0.0825,
+        "BASEMENTAREA_AVG": 0.0697,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9771,
+        "YEARS_BUILD_AVG": 0.7552,
+        "COMMONAREA_AVG": 0.0211,
+        "ELEVATORS_AVG": 0.0,
+        "ENTRANCES_AVG": 0.1379,
+        "FLOORSMAX_AVG": 0.1667,
+        "FLOORSMIN_AVG": 0.2083,
+        "LANDAREA_AVG": 0.0712,
+        "LIVINGAPARTMENTS_AVG": 0.0756,
+        "LIVINGAREA_AVG": 0.0503,
+        "NONLIVINGAPARTMENTS_AVG": 0.0,
+        "NONLIVINGAREA_AVG": 0.0,
+        "APARTMENTS_MODE": 0.084,
+        "BASEMENTAREA_MODE": 0.0724,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9772,
+        "YEARS_BUILD_MODE": 0.7648,
+        "COMMONAREA_MODE": 0.019,
+        "ELEVATORS_MODE": 0.0,
+        "ENTRANCES_MODE": 0.1379,
+        "FLOORSMAX_MODE": 0.1667,
+        "FLOORSMIN_MODE": 0.2083,
+        "LANDAREA_MODE": 0.0729,
+        "LIVINGAPARTMENTS_MODE": 0.0762,
+        "LIVINGAREA_MODE": 0.0524,
+        "NONLIVINGAPARTMENTS_MODE": 0.0,
+        "NONLIVINGAREA_MODE": 0.0,
+        "APARTMENTS_MEDI": 0.0833,
+        "BASEMENTAREA_MEDI": 0.0697,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9771,
+        "YEARS_BUILD_MEDI": 0.7585,
+        "COMMONAREA_MEDI": 0.0208,
+        "ELEVATORS_MEDI": 0.0,
+        "ENTRANCES_MEDI": 0.1379,
+        "FLOORSMAX_MEDI": 0.1667,
+        "FLOORSMIN_MEDI": 0.2083,
+        "LANDAREA_MEDI": 0.0725,
+        "LIVINGAPARTMENTS_MEDI": 0.0761,
+        "LIVINGAREA_MEDI": 0.0512,
+        "NONLIVINGAPARTMENTS_MEDI": 0.0,
+        "NONLIVINGAREA_MEDI": 0.0,
+        "FONDKAPREMONT_MODE": 4.0,
+        "HOUSETYPE_MODE": 0.0,
+        "TOTALAREA_MODE": 0.0564,
+        "WALLSMATERIAL_MODE": 4.0,
+        "EMERGENCYSTATE_MODE": 0.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 2.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 0.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 1.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DAYS_LAST_PHONE_CHANGE": -993.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 0.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 0.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 1.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 1.0
+      },
+      "raw_input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 0.0,
+        "FLAG_OWN_CAR": 0.0,
+        "FLAG_OWN_REALTY": 0.0,
+        "CNT_CHILDREN": 1.0,
+        "AMT_INCOME_TOTAL": 157500.0,
+        "AMT_CREDIT": 450000.0,
+        "AMT_ANNUITY": 42075.0,
+        "AMT_GOODS_PRICE": 450000.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 1.0,
+        "NAME_EDUCATION_TYPE": 1.0,
+        "NAME_FAMILY_STATUS": 2.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.010147,
+        "DAYS_BIRTH": -11881.0,
+        "DAYS_EMPLOYED": -311.0,
+        "DAYS_REGISTRATION": -10275.0,
+        "DAYS_ID_PUBLISH": -3625.0,
+        "OWN_CAR_AGE": null,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 1.0,
+        "FLAG_WORK_PHONE": 1.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 1.0,
+        "FLAG_EMAIL": 0.0,
+        "OCCUPATION_TYPE": 0.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 0.0,
+        "HOUR_APPR_PROCESS_START": 16.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 0.0,
+        "REG_CITY_NOT_WORK_CITY": 0.0,
+        "LIVE_CITY_NOT_WORK_CITY": 0.0,
+        "ORGANIZATION_TYPE": 5.0,
+        "EXT_SOURCE_1": 0.4132414326270309,
+        "EXT_SOURCE_2": 0.6167044926577011,
+        "EXT_SOURCE_3": null,
+        "APARTMENTS_AVG": 0.0825,
+        "BASEMENTAREA_AVG": 0.0697,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9771,
+        "YEARS_BUILD_AVG": null,
+        "COMMONAREA_AVG": null,
+        "ELEVATORS_AVG": 0.0,
+        "ENTRANCES_AVG": 0.1379,
+        "FLOORSMAX_AVG": 0.1667,
+        "FLOORSMIN_AVG": null,
+        "LANDAREA_AVG": 0.0712,
+        "LIVINGAPARTMENTS_AVG": null,
+        "LIVINGAREA_AVG": 0.0503,
+        "NONLIVINGAPARTMENTS_AVG": null,
+        "NONLIVINGAREA_AVG": 0.0,
+        "APARTMENTS_MODE": 0.084,
+        "BASEMENTAREA_MODE": 0.0724,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9772,
+        "YEARS_BUILD_MODE": null,
+        "COMMONAREA_MODE": null,
+        "ELEVATORS_MODE": 0.0,
+        "ENTRANCES_MODE": 0.1379,
+        "FLOORSMAX_MODE": 0.1667,
+        "FLOORSMIN_MODE": null,
+        "LANDAREA_MODE": 0.0729,
+        "LIVINGAPARTMENTS_MODE": null,
+        "LIVINGAREA_MODE": 0.0524,
+        "NONLIVINGAPARTMENTS_MODE": null,
+        "NONLIVINGAREA_MODE": 0.0,
+        "APARTMENTS_MEDI": 0.0833,
+        "BASEMENTAREA_MEDI": 0.0697,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9771,
+        "YEARS_BUILD_MEDI": null,
+        "COMMONAREA_MEDI": null,
+        "ELEVATORS_MEDI": 0.0,
+        "ENTRANCES_MEDI": 0.1379,
+        "FLOORSMAX_MEDI": 0.1667,
+        "FLOORSMIN_MEDI": null,
+        "LANDAREA_MEDI": 0.0725,
+        "LIVINGAPARTMENTS_MEDI": null,
+        "LIVINGAREA_MEDI": 0.0512,
+        "NONLIVINGAPARTMENTS_MEDI": null,
+        "NONLIVINGAREA_MEDI": 0.0,
+        "FONDKAPREMONT_MODE": 4.0,
+        "HOUSETYPE_MODE": 0.0,
+        "TOTALAREA_MODE": 0.0564,
+        "WALLSMATERIAL_MODE": 4.0,
+        "EMERGENCYSTATE_MODE": 0.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 2.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 0.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 1.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DAYS_LAST_PHONE_CHANGE": -993.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 0.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 0.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 1.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": null,
+        "AMT_REQ_CREDIT_BUREAU_DAY": null,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": null,
+        "AMT_REQ_CREDIT_BUREAU_MON": null,
+        "AMT_REQ_CREDIT_BUREAU_QRT": null,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": null
+      },
+      "shap_values": [
+        0.046161023427035805,
+        -0.08480141704855529,
+        0.0011040913178107993,
+        -0.0057015023778595195,
+        0.0010859298059928224,
+        0.00835316923372249,
+        0.06847326264435469,
+        0.11600716494196156,
+        0.22233304819144528,
+        0.002141687642294712,
+        -0.013794613579012415,
+        -0.22526362505291156,
+        0.015900903528045955,
+        -0.0024050731978223308,
+        -0.014094783608693165,
+        0.042197831864280035,
+        0.1294186276297477,
+        -0.03844850397509976,
+        -0.014736916123342348,
+        -0.1933678946456358,
+        0.0,
+        0.0,
+        0.02514705068678784,
+        -9.596861538593065e-06,
+        -0.00219517653040441,
+        0.0009160121919164888,
+        -0.05331998419577746,
+        -0.00602611807489759,
+        -0.0005530665317586515,
+        -0.002559859501605283,
+        -0.009601599783202403,
+        -0.025326332711706805,
+        0.0002152009719604924,
+        0.0001722661626945664,
+        1.8955258630022926e-05,
+        -0.006298611597683645,
+        -0.0014928743042201063,
+        -2.072186811519869e-05,
+        0.030428406665956958,
+        0.018977427891830365,
+        -0.15053458672838052,
+        -0.19185612757218576,
+        -0.007597704173862919,
+        -0.0001407232842626853,
+        0.004962055493077322,
+        -0.001061868587003005,
+        -0.002215969004607464,
+        0.0030619814138220574,
+        -0.0016540122208261003,
+        -0.00017792187230995603,
+        0.0001657043403291242,
+        -0.005986310920413305,
+        -0.013370333182074881,
+        0.0022587522464158896,
+        -0.0021116882101118815,
+        -0.000530691635417865,
+        -0.003531956662947325,
+        0.0014839648992013327,
+        0.00622414933943737,
+        0.0002915222856153357,
+        -0.008807484952519122,
+        0.0013279193214177413,
+        0.003124870565339044,
+        -2.074562936140169e-05,
+        0.004039718065343114,
+        -0.011775235660794749,
+        -0.0014456806832236111,
+        -0.003599627995725635,
+        -0.0008271931313164271,
+        0.008058001001987275,
+        0.0005008054598103668,
+        0.0018846445305976164,
+        0.008194679412671126,
+        -0.000720851183545501,
+        -0.006922021511660488,
+        0.0026789787771046,
+        -0.004231086720656278,
+        -0.0001803334209907943,
+        2.9722349127988314e-05,
+        0.001096771365819569,
+        -0.023524802510622604,
+        0.004354928926010162,
+        -2.895450220531786e-05,
+        -0.002277129828962626,
+        5.763227829211387e-05,
+        -6.664414344116194e-05,
+        0.0009955116848235713,
+        -0.0075479836745722855,
+        0.0,
+        -0.004464740896005616,
+        -0.010283948486296999,
+        -0.0030455783006358124,
+        -0.014950487452106623,
+        0.014773671058294836,
+        0.0,
+        -0.08442219083627998,
+        0.0,
+        -8.2731796848884e-06,
+        -1.1427861467366539e-05,
+        0.0,
+        0.0005046134308325058,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0012209124619088135,
+        0.0002391016386491517,
+        5.1802483479519864e-05,
+        0.0013925791426862648,
+        0.0,
+        0.003416726037055836,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.002148371659054283,
+        -0.001364589161376104,
+        0.0039049126386213285,
+        0.008031116795376754,
+        -0.026751683093313713
+      ],
+      "shap_base": -0.4926742541460766,
+      "shap_margin": -0.9755096767465252,
+      "shap_top_indices": [
+        11,
+        8,
+        19,
+        41,
+        40,
+        16,
+        7,
+        1,
+        95,
+        6
+      ],
+      "shap_other_sum": -0.08882168412400937,
+      "shap_top10_coverage": 0.6925204850232581,
+      "shap_repeat_max_abs_delta": 0.0,
+      "lime_runs": [
+        {
+          "seed": 42,
+          "r2": 0.060964944253336095,
+          "intercept": 0.2905547609579129,
+          "local_prediction": 0.3972383828640823,
+          "indices": [
+            97,
+            39,
+            103,
+            110,
+            9,
+            105,
+            0,
+            107,
+            99,
+            96
+          ],
+          "terms": [
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.1038782215442022
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08237758484882331
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 > 0.00",
+              "weight": 0.07206961707732173
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": -0.06963598802271867
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.05824819728429158
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.057820278299464914
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05225349127739348
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.0368259166273666
+            },
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.03566786810615678
+            },
+            {
+              "condition": "FLAG_DOCUMENT_4 <= 0.00",
+              "weight": 0.02992244741931869
+            }
+          ]
+        },
+        {
+          "seed": 43,
+          "r2": 0.0650308327223812,
+          "intercept": 0.1740679630574325,
+          "local_prediction": 0.33331179402958255,
+          "indices": [
+            99,
+            110,
+            112,
+            39,
+            105,
+            106,
+            113,
+            97,
+            9,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.12471773253940538
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.11772134861950025
+            },
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.10868991077424697
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09404566632997069
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.08258476750678277
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": -0.07755012218030505
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.04392377706347459
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.036274660165455774
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.024906167540996338
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.01376226214929382
+            }
+          ]
+        },
+        {
+          "seed": 44,
+          "r2": 0.10334250943169554,
+          "intercept": -0.015850599508255736,
+          "local_prediction": 0.29486250404028497,
+          "indices": [
+            39,
+            25,
+            105,
+            11,
+            0,
+            40,
+            115,
+            12,
+            97,
+            96
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.085777173331312
+            },
+            {
+              "condition": "FLAG_EMAIL <= 0.00",
+              "weight": 0.06325899684021054
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.061256115553532525
+            },
+            {
+              "condition": "NAME_EDUCATION_TYPE <= 2.00",
+              "weight": -0.05628579219397726
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05423361418999456
+            },
+            {
+              "condition": "0.57 < EXT_SOURCE_2 <= 0.66",
+              "weight": -0.04871708478962904
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": 0.041249729458906606
+            },
+            {
+              "condition": "1.00 < NAME_FAMILY_STATUS <= 2.00",
+              "weight": 0.038371872984435444
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": 0.03617858960575245
+            },
+            {
+              "condition": "FLAG_DOCUMENT_4 <= 0.00",
+              "weight": 0.03538988856800292
+            }
+          ]
+        },
+        {
+          "seed": 45,
+          "r2": 0.0833010412288907,
+          "intercept": -0.24480767031844958,
+          "local_prediction": 0.341285876863158,
+          "indices": [
+            112,
+            9,
+            39,
+            105,
+            106,
+            114,
+            108,
+            0,
+            101,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.127134169215107
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.09455308582146874
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09359612230303722
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.09127046951025228
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.0862935792528913
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": -0.08350980297253147
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.07823509051178272
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.07110635822766369
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.018780313762012
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.008634161549924196
+            }
+          ]
+        },
+        {
+          "seed": 46,
+          "r2": 0.07324159558450605,
+          "intercept": 0.36617502183129697,
+          "local_prediction": 0.3293684226384584,
+          "indices": [
+            114,
+            111,
+            97,
+            105,
+            39,
+            113,
+            110,
+            112,
+            115,
+            109
+          ],
+          "terms": [
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": -0.12110788047304229
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.11447955739664982
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.11151750675378272
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": -0.10605244882410225
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09515508888680357
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.06909140580943153
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.06709905247453135
+            },
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.05243194349884417
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": 0.0369455476063199
+            },
+            {
+              "condition": "FLAG_DOCUMENT_17 <= 0.00",
+              "weight": 0.004851452804371369
+            }
+          ]
+        },
+        {
+          "seed": 47,
+          "r2": 0.0673419767034732,
+          "intercept": 0.07439189204732016,
+          "local_prediction": 0.3585385761115656,
+          "indices": [
+            105,
+            39,
+            110,
+            0,
+            108,
+            106,
+            97,
+            116,
+            103,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.11520246816195288
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0785993267640794
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": -0.06897268014319047
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.06783277560223758
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.05500400624543207
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.04914598471777045
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.04219078271382917
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_WEEK <= 0.00",
+              "weight": 0.02753412488024103
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 > 0.00",
+              "weight": 0.0184043294662725
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.016412868916720773
+            }
+          ]
+        },
+        {
+          "seed": 48,
+          "r2": 0.10255662956920575,
+          "intercept": 0.1966262872133276,
+          "local_prediction": 0.2700095673025027,
+          "indices": [
+            39,
+            110,
+            106,
+            40,
+            108,
+            97,
+            98,
+            115,
+            114,
+            105
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08632254142127906
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.07376654474734305
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.07167439869353076
+            },
+            {
+              "condition": "0.57 < EXT_SOURCE_2 <= 0.66",
+              "weight": -0.06515520388306469
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.06398719641464416
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.05747498039133883
+            },
+            {
+              "condition": "FLAG_DOCUMENT_6 <= 0.00",
+              "weight": -0.053993624008139014
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.046418265582628425
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": 0.03622149387107976
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": -0.03554682119353075
+            }
+          ]
+        },
+        {
+          "seed": 49,
+          "r2": 0.08071971522755472,
+          "intercept": -0.09640222752759653,
+          "local_prediction": 0.3449706855886594,
+          "indices": [
+            105,
+            106,
+            32,
+            39,
+            113,
+            9,
+            103,
+            40,
+            114,
+            101
+          ],
+          "terms": [
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.1191830046912271
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.11810192097023002
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": -0.11787650210735419
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.07601779818666564
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": 0.07382138654502624
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.07280304973019591
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 > 0.00",
+              "weight": 0.06828588510368995
+            },
+            {
+              "condition": "0.57 < EXT_SOURCE_2 <= 0.66",
+              "weight": -0.061091624341729864
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": 0.05796749276742424
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.03416050157088083
+            }
+          ]
+        },
+        {
+          "seed": 50,
+          "r2": 0.09545220176777847,
+          "intercept": 0.22503840825192656,
+          "local_prediction": 0.3561160168352223,
+          "indices": [
+            39,
+            103,
+            105,
+            92,
+            40,
+            32,
+            97,
+            114,
+            107,
+            115
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08462800591977306
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 > 0.00",
+              "weight": 0.07441712501330584
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.06939350325578864
+            },
+            {
+              "condition": "DEF_60_CNT_SOCIAL_CIRCLE <= 0.00",
+              "weight": -0.06749385376007312
+            },
+            {
+              "condition": "0.57 < EXT_SOURCE_2 <= 0.66",
+              "weight": -0.06098943212191683
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": 0.06050196515597481
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.059703954898678684
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": 0.05521550691263713
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.02292774041729431
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.00196351647622077
+            }
+          ]
+        },
+        {
+          "seed": 51,
+          "r2": 0.0875972718810828,
+          "intercept": -0.1481930765174887,
+          "local_prediction": 0.3284083324143212,
+          "indices": [
+            110,
+            106,
+            115,
+            39,
+            107,
+            0,
+            96,
+            97,
+            105,
+            111
+          ],
+          "terms": [
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.1292689584513462
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.1050491883813425
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.09926653781690357
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0917516372962443
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.0797585184369172
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.06133487935708756
+            },
+            {
+              "condition": "FLAG_DOCUMENT_4 <= 0.00",
+              "weight": 0.04550238242204429
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": 0.04189983916564684
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.02234968096095056
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": -0.0010471377228659315
+            }
+          ]
+        }
+      ],
+      "lime_fixed_seed_repeat_max_abs_delta": 0.0,
+      "lime_10_seed_mean_pairwise_jaccard": 0.34476645358998304
+    },
+    {
+      "case": "accepted_2",
+      "decision": "accepted",
+      "applicant_id": 342011,
+      "source_row_index": 208806,
+      "csv_line": 208808,
+      "sample_position": 5,
+      "observed_target": 0,
+      "score": 0.088841467033632,
+      "original_raw_score": 0.14117432566656657,
+      "imputed_features": [
+        "OWN_CAR_AGE",
+        "EXT_SOURCE_1",
+        "BASEMENTAREA_AVG",
+        "YEARS_BUILD_AVG",
+        "COMMONAREA_AVG",
+        "FLOORSMIN_AVG",
+        "LANDAREA_AVG",
+        "LIVINGAPARTMENTS_AVG",
+        "NONLIVINGAPARTMENTS_AVG",
+        "BASEMENTAREA_MODE",
+        "YEARS_BUILD_MODE",
+        "COMMONAREA_MODE",
+        "FLOORSMIN_MODE",
+        "LANDAREA_MODE",
+        "LIVINGAPARTMENTS_MODE",
+        "NONLIVINGAPARTMENTS_MODE",
+        "BASEMENTAREA_MEDI",
+        "YEARS_BUILD_MEDI",
+        "COMMONAREA_MEDI",
+        "FLOORSMIN_MEDI",
+        "LANDAREA_MEDI",
+        "LIVINGAPARTMENTS_MEDI",
+        "NONLIVINGAPARTMENTS_MEDI"
+      ],
+      "input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 0.0,
+        "FLAG_OWN_CAR": 0.0,
+        "FLAG_OWN_REALTY": 1.0,
+        "CNT_CHILDREN": 0.0,
+        "AMT_INCOME_TOTAL": 99000.0,
+        "AMT_CREDIT": 684000.0,
+        "AMT_ANNUITY": 20128.5,
+        "AMT_GOODS_PRICE": 684000.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 1.0,
+        "NAME_EDUCATION_TYPE": 4.0,
+        "NAME_FAMILY_STATUS": 1.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.026392,
+        "DAYS_BIRTH": -15652.0,
+        "DAYS_EMPLOYED": -1975.0,
+        "DAYS_REGISTRATION": -1842.0,
+        "DAYS_ID_PUBLISH": -4277.0,
+        "OWN_CAR_AGE": 9.0,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 1.0,
+        "FLAG_WORK_PHONE": 0.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 0.0,
+        "FLAG_EMAIL": 0.0,
+        "OCCUPATION_TYPE": 3.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 4.0,
+        "HOUR_APPR_PROCESS_START": 16.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 0.0,
+        "REG_CITY_NOT_WORK_CITY": 0.0,
+        "LIVE_CITY_NOT_WORK_CITY": 0.0,
+        "ORGANIZATION_TYPE": 28.0,
+        "EXT_SOURCE_1": 0.505153862331764,
+        "EXT_SOURCE_2": 0.6897054999193545,
+        "EXT_SOURCE_3": 0.7001838506835805,
+        "APARTMENTS_AVG": 0.1856,
+        "BASEMENTAREA_AVG": 0.0762,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9831,
+        "YEARS_BUILD_AVG": 0.7552,
+        "COMMONAREA_AVG": 0.0211,
+        "ELEVATORS_AVG": 0.2,
+        "ENTRANCES_AVG": 0.1724,
+        "FLOORSMAX_AVG": 0.3333,
+        "FLOORSMIN_AVG": 0.2083,
+        "LANDAREA_AVG": 0.048,
+        "LIVINGAPARTMENTS_AVG": 0.0756,
+        "LIVINGAREA_AVG": 0.1927,
+        "NONLIVINGAPARTMENTS_AVG": 0.0,
+        "NONLIVINGAREA_AVG": 0.0,
+        "APARTMENTS_MODE": 0.1891,
+        "BASEMENTAREA_MODE": 0.0745,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9831,
+        "YEARS_BUILD_MODE": 0.7648,
+        "COMMONAREA_MODE": 0.019,
+        "ELEVATORS_MODE": 0.2014,
+        "ENTRANCES_MODE": 0.1724,
+        "FLOORSMAX_MODE": 0.3333,
+        "FLOORSMIN_MODE": 0.2083,
+        "LANDAREA_MODE": 0.0457,
+        "LIVINGAPARTMENTS_MODE": 0.0762,
+        "LIVINGAREA_MODE": 0.2008,
+        "NONLIVINGAPARTMENTS_MODE": 0.0,
+        "NONLIVINGAREA_MODE": 0.0,
+        "APARTMENTS_MEDI": 0.1874,
+        "BASEMENTAREA_MEDI": 0.0757,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9831,
+        "YEARS_BUILD_MEDI": 0.7585,
+        "COMMONAREA_MEDI": 0.0208,
+        "ELEVATORS_MEDI": 0.2,
+        "ENTRANCES_MEDI": 0.1724,
+        "FLOORSMAX_MEDI": 0.3333,
+        "FLOORSMIN_MEDI": 0.2083,
+        "LANDAREA_MEDI": 0.0485,
+        "LIVINGAPARTMENTS_MEDI": 0.0761,
+        "LIVINGAREA_MEDI": 0.1962,
+        "NONLIVINGAPARTMENTS_MEDI": 0.0,
+        "NONLIVINGAREA_MEDI": 0.0,
+        "FONDKAPREMONT_MODE": 4.0,
+        "HOUSETYPE_MODE": 0.0,
+        "TOTALAREA_MODE": 0.1516,
+        "WALLSMATERIAL_MODE": 4.0,
+        "EMERGENCYSTATE_MODE": 0.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 0.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 0.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DAYS_LAST_PHONE_CHANGE": -1589.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 1.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 0.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 0.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 5.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 1.0
+      },
+      "raw_input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 0.0,
+        "FLAG_OWN_CAR": 0.0,
+        "FLAG_OWN_REALTY": 1.0,
+        "CNT_CHILDREN": 0.0,
+        "AMT_INCOME_TOTAL": 99000.0,
+        "AMT_CREDIT": 684000.0,
+        "AMT_ANNUITY": 20128.5,
+        "AMT_GOODS_PRICE": 684000.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 1.0,
+        "NAME_EDUCATION_TYPE": 4.0,
+        "NAME_FAMILY_STATUS": 1.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.026392,
+        "DAYS_BIRTH": -15652.0,
+        "DAYS_EMPLOYED": -1975.0,
+        "DAYS_REGISTRATION": -1842.0,
+        "DAYS_ID_PUBLISH": -4277.0,
+        "OWN_CAR_AGE": null,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 1.0,
+        "FLAG_WORK_PHONE": 0.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 0.0,
+        "FLAG_EMAIL": 0.0,
+        "OCCUPATION_TYPE": 3.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 4.0,
+        "HOUR_APPR_PROCESS_START": 16.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 0.0,
+        "REG_CITY_NOT_WORK_CITY": 0.0,
+        "LIVE_CITY_NOT_WORK_CITY": 0.0,
+        "ORGANIZATION_TYPE": 28.0,
+        "EXT_SOURCE_1": null,
+        "EXT_SOURCE_2": 0.6897054999193545,
+        "EXT_SOURCE_3": 0.7001838506835805,
+        "APARTMENTS_AVG": 0.1856,
+        "BASEMENTAREA_AVG": null,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9831,
+        "YEARS_BUILD_AVG": null,
+        "COMMONAREA_AVG": null,
+        "ELEVATORS_AVG": 0.2,
+        "ENTRANCES_AVG": 0.1724,
+        "FLOORSMAX_AVG": 0.3333,
+        "FLOORSMIN_AVG": null,
+        "LANDAREA_AVG": null,
+        "LIVINGAPARTMENTS_AVG": null,
+        "LIVINGAREA_AVG": 0.1927,
+        "NONLIVINGAPARTMENTS_AVG": null,
+        "NONLIVINGAREA_AVG": 0.0,
+        "APARTMENTS_MODE": 0.1891,
+        "BASEMENTAREA_MODE": null,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9831,
+        "YEARS_BUILD_MODE": null,
+        "COMMONAREA_MODE": null,
+        "ELEVATORS_MODE": 0.2014,
+        "ENTRANCES_MODE": 0.1724,
+        "FLOORSMAX_MODE": 0.3333,
+        "FLOORSMIN_MODE": null,
+        "LANDAREA_MODE": null,
+        "LIVINGAPARTMENTS_MODE": null,
+        "LIVINGAREA_MODE": 0.2008,
+        "NONLIVINGAPARTMENTS_MODE": null,
+        "NONLIVINGAREA_MODE": 0.0,
+        "APARTMENTS_MEDI": 0.1874,
+        "BASEMENTAREA_MEDI": null,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9831,
+        "YEARS_BUILD_MEDI": null,
+        "COMMONAREA_MEDI": null,
+        "ELEVATORS_MEDI": 0.2,
+        "ENTRANCES_MEDI": 0.1724,
+        "FLOORSMAX_MEDI": 0.3333,
+        "FLOORSMIN_MEDI": null,
+        "LANDAREA_MEDI": null,
+        "LIVINGAPARTMENTS_MEDI": null,
+        "LIVINGAREA_MEDI": 0.1962,
+        "NONLIVINGAPARTMENTS_MEDI": null,
+        "NONLIVINGAREA_MEDI": 0.0,
+        "FONDKAPREMONT_MODE": 4.0,
+        "HOUSETYPE_MODE": 0.0,
+        "TOTALAREA_MODE": 0.1516,
+        "WALLSMATERIAL_MODE": 4.0,
+        "EMERGENCYSTATE_MODE": 0.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 0.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 0.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DAYS_LAST_PHONE_CHANGE": -1589.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 1.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 0.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 0.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 5.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 1.0
+      },
+      "shap_values": [
+        0.03155184446695683,
+        -0.07164909356298699,
+        0.0013731410378129754,
+        0.002217793168154296,
+        0.002047091705233229,
+        0.012290555894889716,
+        0.03152513879210162,
+        -0.08300806368627038,
+        -0.14864470697790352,
+        0.0029202702419048408,
+        -0.03400759751331738,
+        0.06062354463217737,
+        -0.026005399629914484,
+        -0.009059149793431864,
+        0.04607487556836454,
+        0.08362975256426709,
+        -0.016692253753999138,
+        -0.0400152568809126,
+        -0.04185437871523318,
+        -0.1562029459039072,
+        0.0,
+        0.0,
+        -0.0031253898046391935,
+        -7.219068352384637e-06,
+        0.0058136049864626095,
+        0.0012185750832479625,
+        -0.032393356071819444,
+        -0.00048643721578228293,
+        -0.0009765719366081262,
+        -0.018648159376042826,
+        0.02565304879205209,
+        -0.016351834929898,
+        0.0005013510593537156,
+        3.010244071271091e-05,
+        -0.001102141440402895,
+        -0.009967723815300618,
+        -0.0013472161529346648,
+        -2.072186811519869e-05,
+        -0.035504993009113105,
+        -0.09066977904060494,
+        -0.33127512970246165,
+        -0.5860666719066043,
+        -0.004244304762652659,
+        0.001346543934021952,
+        0.004576093461277472,
+        -0.0291942528476717,
+        -0.0038647000837643214,
+        -0.021097867290659215,
+        -0.012340721950002466,
+        -0.0037852330513071767,
+        0.0005984431547641422,
+        -0.002168464619205108,
+        -0.00813424574757236,
+        -0.0048440890304830096,
+        -1.5847063730290873e-05,
+        -0.0023908231456455232,
+        0.0038169762142695866,
+        0.002586278380742524,
+        0.010401017480346369,
+        0.0005596693990475666,
+        -0.005507517976891175,
+        -0.00026489117595503495,
+        -0.001665093080032899,
+        0.00036100936058038155,
+        0.0028119931505020714,
+        -0.007096810127398562,
+        -0.001974237734958947,
+        -0.002743725629813619,
+        -0.000944137885442856,
+        0.00237734504527849,
+        -0.012819548481260535,
+        0.0017885632704402158,
+        0.0012909722613708608,
+        0.0024627489487438472,
+        -0.004646296170535158,
+        -0.0007953751179467286,
+        -0.0008555092623980804,
+        -0.008981840220588769,
+        1.2313574885816911e-05,
+        0.001160017799230762,
+        -0.0016120751892864053,
+        -0.006069822412490582,
+        -0.0021184992631463457,
+        -0.002539470712252019,
+        -6.246994194022288e-05,
+        -6.664414344116194e-05,
+        0.002879324021975063,
+        -0.0066972462049931705,
+        0.0,
+        -0.0053860085303325065,
+        -0.013837756937910816,
+        -0.006904065809448792,
+        -0.017349596608238677,
+        -0.029932226359585895,
+        0.0,
+        0.026619024159881714,
+        0.0,
+        -1.3141696624823827e-05,
+        -1.1427861467366539e-05,
+        0.0,
+        0.0003888456283578661,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0011997124400289318,
+        9.382398829815997e-05,
+        5.4958207523643247e-05,
+        0.0020498303995360027,
+        0.0,
+        0.002093415575335316,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.0018795553755408705,
+        -0.002085633991683463,
+        -0.18384324437037322,
+        0.021663169282462223,
+        -0.05998530664415598
+      ],
+      "shap_base": -0.4926742541460766,
+      "shap_margin": -2.3278633908388655,
+      "shap_top_indices": [
+        41,
+        40,
+        117,
+        19,
+        8,
+        39,
+        15,
+        7,
+        1,
+        11
+      ],
+      "shap_other_sum": -0.32808279873812474,
+      "shap_top10_coverage": 0.6810555371385281,
+      "shap_repeat_max_abs_delta": 0.0,
+      "lime_runs": [
+        {
+          "seed": 42,
+          "r2": 0.2927159212164163,
+          "intercept": 0.2312752434926198,
+          "local_prediction": 0.19860350849573802,
+          "indices": [
+            41,
+            40,
+            39,
+            103,
+            9,
+            6,
+            0,
+            101,
+            106,
+            96
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.12452843225505003
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.11664780963320935
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08495387668731791
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.08100096229956405
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.07371752937002043
+            },
+            {
+              "condition": "513531.00 < AMT_CREDIT <= 808650.00",
+              "weight": 0.062409093580384094
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.048292330776117866
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": -0.042574531308969585
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.034878823999315536
+            },
+            {
+              "condition": "FLAG_DOCUMENT_4 <= 0.00",
+              "weight": 0.02782834608675542
+            }
+          ]
+        },
+        {
+          "seed": 43,
+          "r2": 0.2693122251361266,
+          "intercept": 0.2509278222500767,
+          "local_prediction": 0.17217336334072364,
+          "indices": [
+            41,
+            110,
+            40,
+            39,
+            99,
+            106,
+            113,
+            11,
+            105,
+            103
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.13423114941046782
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.12927838972648636
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.10029741325427971
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09272078587368733
+            },
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.09119236994098107
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": -0.06420570629893706
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.05544751736323693
+            },
+            {
+              "condition": "2.00 < NAME_EDUCATION_TYPE <= 4.00",
+              "weight": 0.05242968130436658
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.04903655438558896
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": 0.0431542860684203
+            }
+          ]
+        },
+        {
+          "seed": 44,
+          "r2": 0.3101205633676123,
+          "intercept": 0.12390022797936387,
+          "local_prediction": 0.11826751814596523,
+          "indices": [
+            41,
+            40,
+            39,
+            8,
+            9,
+            11,
+            0,
+            97,
+            29,
+            25
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.12405260237294154
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.11852262290496014
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09605990723518477
+            },
+            {
+              "condition": "AMT_GOODS_PRICE > 679500.00",
+              "weight": -0.06101567097902467
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.0595133249738496
+            },
+            {
+              "condition": "2.00 < NAME_EDUCATION_TYPE <= 4.00",
+              "weight": 0.054169261247904776
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05086749322289324
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": 0.049598271870351845
+            },
+            {
+              "condition": "REGION_RATING_CLIENT_W_CITY <= 2.00",
+              "weight": -0.04506047073860272
+            },
+            {
+              "condition": "FLAG_EMAIL <= 0.00",
+              "weight": 0.03281039861194618
+            }
+          ]
+        },
+        {
+          "seed": 45,
+          "r2": 0.268940234739656,
+          "intercept": 0.12178138054078114,
+          "local_prediction": 0.15541574620039006,
+          "indices": [
+            41,
+            114,
+            40,
+            106,
+            39,
+            0,
+            108,
+            101,
+            107,
+            103
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.13109709621391422
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": -0.12302087759539712
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.10694614122558167
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.1000401307272398
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0856277935078345
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.07884074038731449
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.05791856377740771
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.049245296803999195
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.026607183746221428
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.0035812282555152163
+            }
+          ]
+        },
+        {
+          "seed": 46,
+          "r2": 0.28250876243823897,
+          "intercept": 0.35053438292029593,
+          "local_prediction": 0.14333529352475238,
+          "indices": [
+            41,
+            40,
+            39,
+            105,
+            111,
+            97,
+            107,
+            110,
+            115,
+            113
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.1397771488208649
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.10877888904726478
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09497700763145336
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": -0.08073625000197567
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.07867922536820623
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.06874116704521073
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.06839437020090736
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.06413386816077903
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": 0.06225257748276332
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.04081394292252204
+            }
+          ]
+        },
+        {
+          "seed": 47,
+          "r2": 0.31582456707930806,
+          "intercept": 0.20895390165098882,
+          "local_prediction": 0.10089862352190782,
+          "indices": [
+            41,
+            40,
+            105,
+            39,
+            8,
+            0,
+            115,
+            110,
+            9,
+            108
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.1398627839051327
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.11226277258795309
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.10509656036129973
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08151241799392216
+            },
+            {
+              "condition": "AMT_GOODS_PRICE > 679500.00",
+              "weight": -0.06606161227244263
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.06251226774582859
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.05134736668172284
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": -0.042190761117572785
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.02853420491380988
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.026014567420882703
+            }
+          ]
+        },
+        {
+          "seed": 48,
+          "r2": 0.26348361755775596,
+          "intercept": 0.2777383141197359,
+          "local_prediction": 0.14609380138975264,
+          "indices": [
+            41,
+            40,
+            101,
+            39,
+            108,
+            110,
+            1,
+            0,
+            97,
+            105
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.11732815420382739
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.0994996075109034
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": -0.08998530799718087
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08034927892663947
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.07339433129044869
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.052955229902852265
+            },
+            {
+              "condition": "CODE_GENDER <= 0.00",
+              "weight": -0.05197675319006116
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.04663933341635862
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.044253252350187976
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.01806038898587857
+            }
+          ]
+        },
+        {
+          "seed": 49,
+          "r2": 0.27272241665009,
+          "intercept": 0.07402114002712568,
+          "local_prediction": 0.13740442718266715,
+          "indices": [
+            41,
+            40,
+            106,
+            32,
+            39,
+            105,
+            111,
+            110,
+            113,
+            114
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.1350935314003032
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.11464186212385488
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.10496464563625568
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": -0.09915468975753798
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08225201191614628
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.06418132837530899
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.053762233183486115
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.046212030700576015
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": 0.03393409345429609
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": 0.026967027171168365
+            }
+          ]
+        },
+        {
+          "seed": 50,
+          "r2": 0.30222448366803967,
+          "intercept": 0.33379654360702476,
+          "local_prediction": 0.09545968901390003,
+          "indices": [
+            41,
+            40,
+            103,
+            39,
+            32,
+            92,
+            8,
+            114,
+            108,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.13634693706770543
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.11106392359404434
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.10900110897780184
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08673384872370153
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": 0.08219695301769572
+            },
+            {
+              "condition": "DEF_60_CNT_SOCIAL_CIRCLE <= 0.00",
+              "weight": -0.063609113240379
+            },
+            {
+              "condition": "AMT_GOODS_PRICE > 679500.00",
+              "weight": -0.061641433028684876
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": 0.05605115655621692
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.052577638867131626
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.034233935849255104
+            }
+          ]
+        },
+        {
+          "seed": 51,
+          "r2": 0.2982234120934518,
+          "intercept": 0.04203860924221936,
+          "local_prediction": 0.1474692917969225,
+          "indices": [
+            41,
+            40,
+            39,
+            115,
+            110,
+            0,
+            9,
+            106,
+            107,
+            111
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 > 0.64",
+              "weight": -0.13201244682718966
+            },
+            {
+              "condition": "EXT_SOURCE_2 > 0.66",
+              "weight": -0.10776140501223108
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08835492625481633
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.07284768463148852
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.07181058668300096
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.06699473357585058
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.06658279254369749
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.05463088379344424
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.045918928568043305
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.02375936760675951
+            }
+          ]
+        }
+      ],
+      "lime_fixed_seed_repeat_max_abs_delta": 0.0,
+      "lime_10_seed_mean_pairwise_jaccard": 0.354831334243099
+    },
+    {
+      "case": "rejected_1",
+      "decision": "rejected",
+      "applicant_id": 218332,
+      "source_row_index": 101924,
+      "csv_line": 101926,
+      "sample_position": 3,
+      "observed_target": 1,
+      "score": 0.7978034440622548,
+      "original_raw_score": 0.8143777719797017,
+      "imputed_features": [
+        "OWN_CAR_AGE",
+        "EXT_SOURCE_1"
+      ],
+      "input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 0.0,
+        "FLAG_OWN_CAR": 0.0,
+        "FLAG_OWN_REALTY": 1.0,
+        "CNT_CHILDREN": 0.0,
+        "AMT_INCOME_TOTAL": 99000.0,
+        "AMT_CREDIT": 229500.0,
+        "AMT_ANNUITY": 14796.0,
+        "AMT_GOODS_PRICE": 229500.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 3.0,
+        "NAME_EDUCATION_TYPE": 4.0,
+        "NAME_FAMILY_STATUS": 1.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.028663,
+        "DAYS_BIRTH": -21600.0,
+        "DAYS_EMPLOYED": 365243.0,
+        "DAYS_REGISTRATION": -1638.0,
+        "DAYS_ID_PUBLISH": -4163.0,
+        "OWN_CAR_AGE": 9.0,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 0.0,
+        "FLAG_WORK_PHONE": 0.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 0.0,
+        "FLAG_EMAIL": 1.0,
+        "OCCUPATION_TYPE": 18.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 5.0,
+        "HOUR_APPR_PROCESS_START": 10.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 0.0,
+        "REG_CITY_NOT_WORK_CITY": 0.0,
+        "LIVE_CITY_NOT_WORK_CITY": 0.0,
+        "ORGANIZATION_TYPE": 57.0,
+        "EXT_SOURCE_1": 0.505153862331764,
+        "EXT_SOURCE_2": 0.1076471223032718,
+        "EXT_SOURCE_3": 0.1082263226697141,
+        "APARTMENTS_AVG": 0.034,
+        "BASEMENTAREA_AVG": 0.0,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9786,
+        "YEARS_BUILD_AVG": 0.7076,
+        "COMMONAREA_AVG": 0.0049,
+        "ELEVATORS_AVG": 0.0,
+        "ENTRANCES_AVG": 0.0345,
+        "FLOORSMAX_AVG": 0.0417,
+        "FLOORSMIN_AVG": 0.0833,
+        "LANDAREA_AVG": 0.0464,
+        "LIVINGAPARTMENTS_AVG": 0.0277,
+        "LIVINGAREA_AVG": 0.0179,
+        "NONLIVINGAPARTMENTS_AVG": 0.0,
+        "NONLIVINGAREA_AVG": 0.0,
+        "APARTMENTS_MODE": 0.0347,
+        "BASEMENTAREA_MODE": 0.0,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9786,
+        "YEARS_BUILD_MODE": 0.7190000000000001,
+        "COMMONAREA_MODE": 0.0049,
+        "ELEVATORS_MODE": 0.0,
+        "ENTRANCES_MODE": 0.0345,
+        "FLOORSMAX_MODE": 0.0417,
+        "FLOORSMIN_MODE": 0.0833,
+        "LANDAREA_MODE": 0.0475,
+        "LIVINGAPARTMENTS_MODE": 0.0303,
+        "LIVINGAREA_MODE": 0.0187,
+        "NONLIVINGAPARTMENTS_MODE": 0.0,
+        "NONLIVINGAREA_MODE": 0.0,
+        "APARTMENTS_MEDI": 0.0344,
+        "BASEMENTAREA_MEDI": 0.0,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9786,
+        "YEARS_BUILD_MEDI": 0.7115,
+        "COMMONAREA_MEDI": 0.0049,
+        "ELEVATORS_MEDI": 0.0,
+        "ENTRANCES_MEDI": 0.0345,
+        "FLOORSMAX_MEDI": 0.0417,
+        "FLOORSMIN_MEDI": 0.0833,
+        "LANDAREA_MEDI": 0.0472,
+        "LIVINGAPARTMENTS_MEDI": 0.0282,
+        "LIVINGAREA_MEDI": 0.0182,
+        "NONLIVINGAPARTMENTS_MEDI": 0.0,
+        "NONLIVINGAREA_MEDI": 0.0,
+        "FONDKAPREMONT_MODE": 2.0,
+        "HOUSETYPE_MODE": 0.0,
+        "TOTALAREA_MODE": 0.0151,
+        "WALLSMATERIAL_MODE": 5.0,
+        "EMERGENCYSTATE_MODE": 0.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 3.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 1.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 3.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DAYS_LAST_PHONE_CHANGE": -1134.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 1.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 0.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 0.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 1.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 7.0
+      },
+      "raw_input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 0.0,
+        "FLAG_OWN_CAR": 0.0,
+        "FLAG_OWN_REALTY": 1.0,
+        "CNT_CHILDREN": 0.0,
+        "AMT_INCOME_TOTAL": 99000.0,
+        "AMT_CREDIT": 229500.0,
+        "AMT_ANNUITY": 14796.0,
+        "AMT_GOODS_PRICE": 229500.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 3.0,
+        "NAME_EDUCATION_TYPE": 4.0,
+        "NAME_FAMILY_STATUS": 1.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.028663,
+        "DAYS_BIRTH": -21600.0,
+        "DAYS_EMPLOYED": 365243.0,
+        "DAYS_REGISTRATION": -1638.0,
+        "DAYS_ID_PUBLISH": -4163.0,
+        "OWN_CAR_AGE": null,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 0.0,
+        "FLAG_WORK_PHONE": 0.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 0.0,
+        "FLAG_EMAIL": 1.0,
+        "OCCUPATION_TYPE": 18.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 5.0,
+        "HOUR_APPR_PROCESS_START": 10.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 0.0,
+        "REG_CITY_NOT_WORK_CITY": 0.0,
+        "LIVE_CITY_NOT_WORK_CITY": 0.0,
+        "ORGANIZATION_TYPE": 57.0,
+        "EXT_SOURCE_1": null,
+        "EXT_SOURCE_2": 0.1076471223032718,
+        "EXT_SOURCE_3": 0.1082263226697141,
+        "APARTMENTS_AVG": 0.034,
+        "BASEMENTAREA_AVG": 0.0,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9786,
+        "YEARS_BUILD_AVG": 0.7076,
+        "COMMONAREA_AVG": 0.0049,
+        "ELEVATORS_AVG": 0.0,
+        "ENTRANCES_AVG": 0.0345,
+        "FLOORSMAX_AVG": 0.0417,
+        "FLOORSMIN_AVG": 0.0833,
+        "LANDAREA_AVG": 0.0464,
+        "LIVINGAPARTMENTS_AVG": 0.0277,
+        "LIVINGAREA_AVG": 0.0179,
+        "NONLIVINGAPARTMENTS_AVG": 0.0,
+        "NONLIVINGAREA_AVG": 0.0,
+        "APARTMENTS_MODE": 0.0347,
+        "BASEMENTAREA_MODE": 0.0,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9786,
+        "YEARS_BUILD_MODE": 0.7190000000000001,
+        "COMMONAREA_MODE": 0.0049,
+        "ELEVATORS_MODE": 0.0,
+        "ENTRANCES_MODE": 0.0345,
+        "FLOORSMAX_MODE": 0.0417,
+        "FLOORSMIN_MODE": 0.0833,
+        "LANDAREA_MODE": 0.0475,
+        "LIVINGAPARTMENTS_MODE": 0.0303,
+        "LIVINGAREA_MODE": 0.0187,
+        "NONLIVINGAPARTMENTS_MODE": 0.0,
+        "NONLIVINGAREA_MODE": 0.0,
+        "APARTMENTS_MEDI": 0.0344,
+        "BASEMENTAREA_MEDI": 0.0,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9786,
+        "YEARS_BUILD_MEDI": 0.7115,
+        "COMMONAREA_MEDI": 0.0049,
+        "ELEVATORS_MEDI": 0.0,
+        "ENTRANCES_MEDI": 0.0345,
+        "FLOORSMAX_MEDI": 0.0417,
+        "FLOORSMIN_MEDI": 0.0833,
+        "LANDAREA_MEDI": 0.0472,
+        "LIVINGAPARTMENTS_MEDI": 0.0282,
+        "LIVINGAREA_MEDI": 0.0182,
+        "NONLIVINGAPARTMENTS_MEDI": 0.0,
+        "NONLIVINGAREA_MEDI": 0.0,
+        "FONDKAPREMONT_MODE": 2.0,
+        "HOUSETYPE_MODE": 0.0,
+        "TOTALAREA_MODE": 0.0151,
+        "WALLSMATERIAL_MODE": 5.0,
+        "EMERGENCYSTATE_MODE": 0.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 3.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 1.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 3.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+        "DAYS_LAST_PHONE_CHANGE": -1134.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 1.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 0.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 0.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 1.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 7.0
+      },
+      "shap_values": [
+        0.012569388091209834,
+        -0.06677518404947859,
+        0.0055682261836674475,
+        0.0006604396185008294,
+        0.0025606945484846124,
+        0.011266127796116108,
+        -0.09390513798975018,
+        -0.06874612199334057,
+        0.08478282502591757,
+        0.0012797742302781822,
+        -0.02353047455178032,
+        0.03701559756736096,
+        -0.009251871693046412,
+        -0.0035898442767084114,
+        0.04678199316343929,
+        -0.08451482519311361,
+        0.045672865526549054,
+        -7.879625149169957e-05,
+        0.002296015684027764,
+        -0.12498725490622162,
+        0.0,
+        0.0,
+        -0.007385407277376707,
+        -4.835072570653766e-06,
+        0.0017750377086045415,
+        -0.001874269959900485,
+        -0.00010596475061715566,
+        0.0028076702991768456,
+        -0.0003674533162409805,
+        -0.0020831703779651384,
+        0.012589956996346777,
+        0.006845093066114281,
+        0.00025942042121026,
+        7.681287284830367e-05,
+        2.764864138115254e-05,
+        -0.0068763866909413674,
+        -0.0002825086780932644,
+        -1.182909764113937e-05,
+        -0.011999708836479921,
+        -0.06225857475224908,
+        0.7223155496437719,
+        1.3749853240143415,
+        -0.008338687801961016,
+        0.003583988019851655,
+        0.0023923240230101874,
+        -0.003968318073940734,
+        -0.011749550244468653,
+        0.0028826124135828265,
+        0.0036256542188513393,
+        0.004873309544711378,
+        0.0010375277232600216,
+        0.0010695284332640895,
+        -0.005319889979276099,
+        0.011667420515488193,
+        -0.0033538349148858186,
+        -0.0009248014502674783,
+        -0.0011505984242770688,
+        -0.0046704502622472305,
+        0.0067557026558233615,
+        0.00017749431947192178,
+        -0.012086766712402377,
+        0.0006556196414937201,
+        0.0003345806108508516,
+        0.0016716370362725083,
+        0.0053069727445590725,
+        -0.005238860340178145,
+        -0.0021425653496346384,
+        0.001922147039733748,
+        -0.0017362612020873401,
+        0.005098025157583968,
+        0.011570379685518726,
+        -0.0045078102838869635,
+        0.0006075882607515206,
+        0.000625306828207907,
+        -0.004766271934225501,
+        0.0006182673166857423,
+        0.00044182485527116244,
+        0.004664118532044264,
+        0.0005705696433047357,
+        0.0020856435915377006,
+        0.009887546978486096,
+        0.008561202050255165,
+        -0.021529981950169082,
+        0.0002315977537854372,
+        -0.00014828387311402542,
+        -0.00010446731450758048,
+        0.0007201001883488912,
+        0.0010559776067274743,
+        0.0,
+        8.544390735112516e-05,
+        0.05986424568539893,
+        0.0023642760502776776,
+        -0.0077510394746184786,
+        0.014770033707742809,
+        0.0,
+        0.015669128299859607,
+        0.0,
+        -8.2731796848884e-06,
+        -7.486114522649535e-06,
+        0.0,
+        0.0005670275408136545,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.000720233293145707,
+        0.00024511787110971896,
+        5.5331100860119474e-05,
+        0.0018908246799921433,
+        0.0,
+        0.0024535574047064895,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.0015373396064669478,
+        -0.0008844622213962144,
+        0.001757671527967979,
+        -0.04191297459550923,
+        0.010490812526451003
+      ],
+      "shap_base": -0.4926742541460766,
+      "shap_margin": 1.372621982918946,
+      "shap_top_indices": [
+        41,
+        40,
+        19,
+        6,
+        8,
+        15,
+        7,
+        1,
+        39,
+        90
+      ],
+      "shap_other_sum": 0.12453539157974602,
+      "shap_top10_coverage": 0.833720495530098,
+      "shap_repeat_max_abs_delta": 0.0,
+      "lime_runs": [
+        {
+          "seed": 42,
+          "r2": 0.5494867574675006,
+          "intercept": 0.26391822001630383,
+          "local_prediction": 0.5255641836901117,
+          "indices": [
+            41,
+            40,
+            6,
+            105,
+            103,
+            39,
+            99,
+            107,
+            0,
+            115
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21430952324478558
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13203444018929758
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.08595039935958583
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.08285296175242429
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.08127740201857057
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.07796716089703064
+            },
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.06371286267019143
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.06326171003632039
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.06093125282651335
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.012247001151575293
+            }
+          ]
+        },
+        {
+          "seed": 43,
+          "r2": 0.5670388909817023,
+          "intercept": 0.3449085027977719,
+          "local_prediction": 0.5478801117604025,
+          "indices": [
+            41,
+            40,
+            106,
+            39,
+            6,
+            113,
+            112,
+            99,
+            107,
+            9
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.23050207620137708
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13537348117903758
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": -0.10914254179680728
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08604926821114593
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.07874371109779603
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.07691253904107996
+            },
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.06481027993636912
+            },
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.05775073146908354
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.01147135872323741
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": -0.002685331883769647
+            }
+          ]
+        },
+        {
+          "seed": 44,
+          "r2": 0.5328244257804602,
+          "intercept": -0.042474570152318036,
+          "local_prediction": 0.5493927802513983,
+          "indices": [
+            41,
+            40,
+            105,
+            39,
+            96,
+            6,
+            0,
+            9,
+            92,
+            108
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.20982239540061895
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1486094545993189
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.10675536040859951
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.07843120833774622
+            },
+            {
+              "condition": "FLAG_DOCUMENT_4 <= 0.00",
+              "weight": 0.07842250378423544
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.06230958412528864
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05576450002052931
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.05158170488657923
+            },
+            {
+              "condition": "DEF_60_CNT_SOCIAL_CIRCLE <= 0.00",
+              "weight": -0.049313812432931835
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": -0.025896380475690785
+            }
+          ]
+        },
+        {
+          "seed": 45,
+          "r2": 0.5489923230937259,
+          "intercept": -0.1718447489522169,
+          "local_prediction": 0.536201416935131,
+          "indices": [
+            41,
+            40,
+            105,
+            39,
+            101,
+            6,
+            106,
+            112,
+            111,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21238829115915484
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1403800608595599
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.12839910373402258
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09052674380165003
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.07705139318405556
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.0767767494970518
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.0626320191323667
+            },
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.05521908387004165
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.014180832854988926
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.004045386788559612
+            }
+          ]
+        },
+        {
+          "seed": 46,
+          "r2": 0.5510573149497144,
+          "intercept": 0.1597060001432612,
+          "local_prediction": 0.5520097495946685,
+          "indices": [
+            41,
+            40,
+            39,
+            110,
+            111,
+            97,
+            114,
+            6,
+            113,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.20927140674030545
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.15122965717618653
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09121138628325627
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.08278899289958269
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.07953705915375706
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.06788306814535879
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": -0.06444901015048889
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.060266179365724266
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.03784852648838514
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.008712031348276377
+            }
+          ]
+        },
+        {
+          "seed": 47,
+          "r2": 0.5182194620575413,
+          "intercept": 0.0795184538475815,
+          "local_prediction": 0.5382851541694946,
+          "indices": [
+            41,
+            40,
+            0,
+            39,
+            6,
+            105,
+            107,
+            116,
+            115,
+            101
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.20577202750718013
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1297566859186131
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.07500695077765104
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.07062057608137494
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.06614052204456486
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.05749794555975864
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.04538944307166693
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_WEEK <= 0.00",
+              "weight": 0.04364689020348745
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.043135525793321076
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.031131115183400757
+            }
+          ]
+        },
+        {
+          "seed": 48,
+          "r2": 0.5043206732279024,
+          "intercept": -0.17348300901908753,
+          "local_prediction": 0.5196296787053363,
+          "indices": [
+            41,
+            40,
+            39,
+            6,
+            110,
+            9,
+            108,
+            103,
+            105,
+            106
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.1930989008025495
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13789679277902345
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0855242819154942
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.07657576388465653
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.07461901067530417
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.0631730260619729
+            },
+            {
+              "condition": "FLAG_DOCUMENT_16 <= 0.00",
+              "weight": 0.06180794685978349
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": 0.05945607821089288
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.057205568372355485
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.03690684593170421
+            }
+          ]
+        },
+        {
+          "seed": 49,
+          "r2": 0.5864924654190911,
+          "intercept": 0.07798082094542227,
+          "local_prediction": 0.4989702645859192,
+          "indices": [
+            41,
+            40,
+            39,
+            6,
+            110,
+            0,
+            7,
+            19,
+            101,
+            113
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21835722724416654
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13616682397096846
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08909657148953533
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.07479164888321428
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.05794999012023973
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.057465033942075694
+            },
+            {
+              "condition": "AMT_ANNUITY <= 16510.50",
+              "weight": -0.04927732584951933
+            },
+            {
+              "condition": "OWN_CAR_AGE <= 9.00",
+              "weight": -0.04588234030100518
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.026140445736210775
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": 0.005764666171039265
+            }
+          ]
+        },
+        {
+          "seed": 50,
+          "r2": 0.5324578609609103,
+          "intercept": 0.22592311552514308,
+          "local_prediction": 0.5471064743726679,
+          "indices": [
+            41,
+            40,
+            39,
+            110,
+            103,
+            6,
+            105,
+            9,
+            115,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21778987428873728
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13304751978511728
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0889014434073643
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.08880595582103763
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.08525056694411946
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.07587051547831447
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.05263863869934646
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": -0.041653534370939944
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.035015189107189294
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.02221026725351499
+            }
+          ]
+        },
+        {
+          "seed": 51,
+          "r2": 0.5316404251822213,
+          "intercept": 0.004015478962255237,
+          "local_prediction": 0.5391071919307084,
+          "indices": [
+            41,
+            40,
+            39,
+            110,
+            107,
+            6,
+            115,
+            0,
+            32,
+            111
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.2078648231004037
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1299807256580446
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09467339946986224
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.08825179828696963
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.08100837569739976
+            },
+            {
+              "condition": "AMT_CREDIT <= 270000.00",
+              "weight": -0.06942816188573082
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.056107365352833345
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.055028638467418935
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": 0.02967769843925515
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": -0.025858218912336414
+            }
+          ]
+        }
+      ],
+      "lime_fixed_seed_repeat_max_abs_delta": 0.0,
+      "lime_10_seed_mean_pairwise_jaccard": 0.42614977614977617
+    },
+    {
+      "case": "rejected_2",
+      "decision": "rejected",
+      "applicant_id": 425755,
+      "source_row_index": 281182,
+      "csv_line": 281184,
+      "sample_position": 4,
+      "observed_target": 0,
+      "score": 0.8348813526670392,
+      "original_raw_score": 0.8213248183257292,
+      "imputed_features": [
+        "APARTMENTS_AVG",
+        "BASEMENTAREA_AVG",
+        "YEARS_BEGINEXPLUATATION_AVG",
+        "YEARS_BUILD_AVG",
+        "COMMONAREA_AVG",
+        "ELEVATORS_AVG",
+        "ENTRANCES_AVG",
+        "FLOORSMAX_AVG",
+        "FLOORSMIN_AVG",
+        "LANDAREA_AVG",
+        "LIVINGAPARTMENTS_AVG",
+        "LIVINGAREA_AVG",
+        "NONLIVINGAPARTMENTS_AVG",
+        "NONLIVINGAREA_AVG",
+        "APARTMENTS_MODE",
+        "BASEMENTAREA_MODE",
+        "YEARS_BEGINEXPLUATATION_MODE",
+        "YEARS_BUILD_MODE",
+        "COMMONAREA_MODE",
+        "ELEVATORS_MODE",
+        "ENTRANCES_MODE",
+        "FLOORSMAX_MODE",
+        "FLOORSMIN_MODE",
+        "LANDAREA_MODE",
+        "LIVINGAPARTMENTS_MODE",
+        "LIVINGAREA_MODE",
+        "NONLIVINGAPARTMENTS_MODE",
+        "NONLIVINGAREA_MODE",
+        "APARTMENTS_MEDI",
+        "BASEMENTAREA_MEDI",
+        "YEARS_BEGINEXPLUATATION_MEDI",
+        "YEARS_BUILD_MEDI",
+        "COMMONAREA_MEDI",
+        "ELEVATORS_MEDI",
+        "ENTRANCES_MEDI",
+        "FLOORSMAX_MEDI",
+        "FLOORSMIN_MEDI",
+        "LANDAREA_MEDI",
+        "LIVINGAPARTMENTS_MEDI",
+        "LIVINGAREA_MEDI",
+        "NONLIVINGAPARTMENTS_MEDI",
+        "NONLIVINGAREA_MEDI",
+        "TOTALAREA_MODE"
+      ],
+      "input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 1.0,
+        "FLAG_OWN_CAR": 1.0,
+        "FLAG_OWN_REALTY": 1.0,
+        "CNT_CHILDREN": 0.0,
+        "AMT_INCOME_TOTAL": 405000.0,
+        "AMT_CREDIT": 450000.0,
+        "AMT_ANNUITY": 30442.5,
+        "AMT_GOODS_PRICE": 450000.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 7.0,
+        "NAME_EDUCATION_TYPE": 4.0,
+        "NAME_FAMILY_STATUS": 1.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.028663,
+        "DAYS_BIRTH": -10648.0,
+        "DAYS_EMPLOYED": -808.0,
+        "DAYS_REGISTRATION": -4107.0,
+        "DAYS_ID_PUBLISH": -2875.0,
+        "OWN_CAR_AGE": 1.0,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 1.0,
+        "FLAG_WORK_PHONE": 0.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 0.0,
+        "FLAG_EMAIL": 0.0,
+        "OCCUPATION_TYPE": 8.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 2.0,
+        "HOUR_APPR_PROCESS_START": 14.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 1.0,
+        "REG_CITY_NOT_WORK_CITY": 1.0,
+        "LIVE_CITY_NOT_WORK_CITY": 1.0,
+        "ORGANIZATION_TYPE": 55.0,
+        "EXT_SOURCE_1": 0.2364135288416737,
+        "EXT_SOURCE_2": 0.2637121590663828,
+        "EXT_SOURCE_3": 0.1575949986663102,
+        "APARTMENTS_AVG": 0.0876,
+        "BASEMENTAREA_AVG": 0.0762,
+        "YEARS_BEGINEXPLUATATION_AVG": 0.9816,
+        "YEARS_BUILD_AVG": 0.7552,
+        "COMMONAREA_AVG": 0.0211,
+        "ELEVATORS_AVG": 0.0,
+        "ENTRANCES_AVG": 0.1379,
+        "FLOORSMAX_AVG": 0.1667,
+        "FLOORSMIN_AVG": 0.2083,
+        "LANDAREA_AVG": 0.048,
+        "LIVINGAPARTMENTS_AVG": 0.0756,
+        "LIVINGAREA_AVG": 0.0742,
+        "NONLIVINGAPARTMENTS_AVG": 0.0,
+        "NONLIVINGAREA_AVG": 0.0036,
+        "APARTMENTS_MODE": 0.084,
+        "BASEMENTAREA_MODE": 0.0745,
+        "YEARS_BEGINEXPLUATATION_MODE": 0.9816,
+        "YEARS_BUILD_MODE": 0.7648,
+        "COMMONAREA_MODE": 0.019,
+        "ELEVATORS_MODE": 0.0,
+        "ENTRANCES_MODE": 0.1379,
+        "FLOORSMAX_MODE": 0.1667,
+        "FLOORSMIN_MODE": 0.2083,
+        "LANDAREA_MODE": 0.0457,
+        "LIVINGAPARTMENTS_MODE": 0.0762,
+        "LIVINGAREA_MODE": 0.073,
+        "NONLIVINGAPARTMENTS_MODE": 0.0,
+        "NONLIVINGAREA_MODE": 0.0011,
+        "APARTMENTS_MEDI": 0.0864,
+        "BASEMENTAREA_MEDI": 0.0757,
+        "YEARS_BEGINEXPLUATATION_MEDI": 0.9816,
+        "YEARS_BUILD_MEDI": 0.7585,
+        "COMMONAREA_MEDI": 0.0208,
+        "ELEVATORS_MEDI": 0.0,
+        "ENTRANCES_MEDI": 0.1379,
+        "FLOORSMAX_MEDI": 0.1667,
+        "FLOORSMIN_MEDI": 0.2083,
+        "LANDAREA_MEDI": 0.0485,
+        "LIVINGAPARTMENTS_MEDI": 0.0761,
+        "LIVINGAREA_MEDI": 0.0746,
+        "NONLIVINGAPARTMENTS_MEDI": 0.0,
+        "NONLIVINGAREA_MEDI": 0.0031,
+        "FONDKAPREMONT_MODE": 4.0,
+        "HOUSETYPE_MODE": 3.0,
+        "TOTALAREA_MODE": 0.0687,
+        "WALLSMATERIAL_MODE": 7.0,
+        "EMERGENCYSTATE_MODE": 2.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 6.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 1.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 6.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 1.0,
+        "DAYS_LAST_PHONE_CHANGE": -298.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 0.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 1.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 0.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 1.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 3.0
+      },
+      "raw_input": {
+        "NAME_CONTRACT_TYPE": 0.0,
+        "CODE_GENDER": 1.0,
+        "FLAG_OWN_CAR": 1.0,
+        "FLAG_OWN_REALTY": 1.0,
+        "CNT_CHILDREN": 0.0,
+        "AMT_INCOME_TOTAL": 405000.0,
+        "AMT_CREDIT": 450000.0,
+        "AMT_ANNUITY": 30442.5,
+        "AMT_GOODS_PRICE": 450000.0,
+        "NAME_TYPE_SUITE": 6.0,
+        "NAME_INCOME_TYPE": 7.0,
+        "NAME_EDUCATION_TYPE": 4.0,
+        "NAME_FAMILY_STATUS": 1.0,
+        "NAME_HOUSING_TYPE": 1.0,
+        "REGION_POPULATION_RELATIVE": 0.028663,
+        "DAYS_BIRTH": -10648.0,
+        "DAYS_EMPLOYED": -808.0,
+        "DAYS_REGISTRATION": -4107.0,
+        "DAYS_ID_PUBLISH": -2875.0,
+        "OWN_CAR_AGE": 1.0,
+        "FLAG_MOBIL": 1.0,
+        "FLAG_EMP_PHONE": 1.0,
+        "FLAG_WORK_PHONE": 0.0,
+        "FLAG_CONT_MOBILE": 1.0,
+        "FLAG_PHONE": 0.0,
+        "FLAG_EMAIL": 0.0,
+        "OCCUPATION_TYPE": 8.0,
+        "CNT_FAM_MEMBERS": 2.0,
+        "REGION_RATING_CLIENT": 2.0,
+        "REGION_RATING_CLIENT_W_CITY": 2.0,
+        "WEEKDAY_APPR_PROCESS_START": 2.0,
+        "HOUR_APPR_PROCESS_START": 14.0,
+        "REG_REGION_NOT_LIVE_REGION": 0.0,
+        "REG_REGION_NOT_WORK_REGION": 0.0,
+        "LIVE_REGION_NOT_WORK_REGION": 0.0,
+        "REG_CITY_NOT_LIVE_CITY": 1.0,
+        "REG_CITY_NOT_WORK_CITY": 1.0,
+        "LIVE_CITY_NOT_WORK_CITY": 1.0,
+        "ORGANIZATION_TYPE": 55.0,
+        "EXT_SOURCE_1": 0.2364135288416737,
+        "EXT_SOURCE_2": 0.2637121590663828,
+        "EXT_SOURCE_3": 0.1575949986663102,
+        "APARTMENTS_AVG": null,
+        "BASEMENTAREA_AVG": null,
+        "YEARS_BEGINEXPLUATATION_AVG": null,
+        "YEARS_BUILD_AVG": null,
+        "COMMONAREA_AVG": null,
+        "ELEVATORS_AVG": null,
+        "ENTRANCES_AVG": null,
+        "FLOORSMAX_AVG": null,
+        "FLOORSMIN_AVG": null,
+        "LANDAREA_AVG": null,
+        "LIVINGAPARTMENTS_AVG": null,
+        "LIVINGAREA_AVG": null,
+        "NONLIVINGAPARTMENTS_AVG": null,
+        "NONLIVINGAREA_AVG": null,
+        "APARTMENTS_MODE": null,
+        "BASEMENTAREA_MODE": null,
+        "YEARS_BEGINEXPLUATATION_MODE": null,
+        "YEARS_BUILD_MODE": null,
+        "COMMONAREA_MODE": null,
+        "ELEVATORS_MODE": null,
+        "ENTRANCES_MODE": null,
+        "FLOORSMAX_MODE": null,
+        "FLOORSMIN_MODE": null,
+        "LANDAREA_MODE": null,
+        "LIVINGAPARTMENTS_MODE": null,
+        "LIVINGAREA_MODE": null,
+        "NONLIVINGAPARTMENTS_MODE": null,
+        "NONLIVINGAREA_MODE": null,
+        "APARTMENTS_MEDI": null,
+        "BASEMENTAREA_MEDI": null,
+        "YEARS_BEGINEXPLUATATION_MEDI": null,
+        "YEARS_BUILD_MEDI": null,
+        "COMMONAREA_MEDI": null,
+        "ELEVATORS_MEDI": null,
+        "ENTRANCES_MEDI": null,
+        "FLOORSMAX_MEDI": null,
+        "FLOORSMIN_MEDI": null,
+        "LANDAREA_MEDI": null,
+        "LIVINGAPARTMENTS_MEDI": null,
+        "LIVINGAREA_MEDI": null,
+        "NONLIVINGAPARTMENTS_MEDI": null,
+        "NONLIVINGAREA_MEDI": null,
+        "FONDKAPREMONT_MODE": 4.0,
+        "HOUSETYPE_MODE": 3.0,
+        "TOTALAREA_MODE": null,
+        "WALLSMATERIAL_MODE": 7.0,
+        "EMERGENCYSTATE_MODE": 2.0,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 6.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": 1.0,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 6.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": 1.0,
+        "DAYS_LAST_PHONE_CHANGE": -298.0,
+        "FLAG_DOCUMENT_2": 0.0,
+        "FLAG_DOCUMENT_3": 0.0,
+        "FLAG_DOCUMENT_4": 0.0,
+        "FLAG_DOCUMENT_5": 0.0,
+        "FLAG_DOCUMENT_6": 0.0,
+        "FLAG_DOCUMENT_7": 0.0,
+        "FLAG_DOCUMENT_8": 1.0,
+        "FLAG_DOCUMENT_9": 0.0,
+        "FLAG_DOCUMENT_10": 0.0,
+        "FLAG_DOCUMENT_11": 0.0,
+        "FLAG_DOCUMENT_12": 0.0,
+        "FLAG_DOCUMENT_13": 0.0,
+        "FLAG_DOCUMENT_14": 0.0,
+        "FLAG_DOCUMENT_15": 0.0,
+        "FLAG_DOCUMENT_16": 0.0,
+        "FLAG_DOCUMENT_17": 0.0,
+        "FLAG_DOCUMENT_18": 0.0,
+        "FLAG_DOCUMENT_19": 0.0,
+        "FLAG_DOCUMENT_20": 0.0,
+        "FLAG_DOCUMENT_21": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_MON": 1.0,
+        "AMT_REQ_CREDIT_BUREAU_QRT": 0.0,
+        "AMT_REQ_CREDIT_BUREAU_YEAR": 3.0
+      },
+      "shap_values": [
+        0.023551913926090268,
+        0.061316343204778134,
+        -0.0028253172011489802,
+        0.0011875486770407699,
+        0.002050765982430534,
+        -0.005510648197851406,
+        0.040584324712470546,
+        0.12017220387494372,
+        0.184452735544033,
+        0.0005838052458254097,
+        0.015878574515039746,
+        0.06444709061501305,
+        -0.013627762652570617,
+        -0.0006587186807723429,
+        0.021362079963699463,
+        0.018565727615438524,
+        0.0633371122762809,
+        0.002159260751410844,
+        0.005576383736079813,
+        -0.1864257201152522,
+        0.0,
+        0.0,
+        -0.0023622364665660486,
+        -0.00033433974108628854,
+        0.0007094303081431961,
+        0.00013187093723002275,
+        0.014155641548548422,
+        -0.0036126909557996504,
+        -0.0004696382592655075,
+        0.004791053076529131,
+        -0.016588852055250267,
+        0.012749719582010677,
+        0.00023884520601563116,
+        0.0007532271063258983,
+        1.3410868516400526e-05,
+        0.02351029469047021,
+        0.0019882801399372188,
+        4.673936141133119e-05,
+        -0.0014825909816840223,
+        0.20433395208893346,
+        0.43790121785755226,
+        0.927764081615231,
+        -0.017892213620276307,
+        0.005929578527708651,
+        0.0034979830090447433,
+        0.0002933501997354845,
+        -0.018041719092121232,
+        0.0016396715042112536,
+        -0.0018061841999188425,
+        0.0018912031859712997,
+        -0.000173261000712174,
+        -0.00016044435230580574,
+        -0.0015969439381419116,
+        -0.019912742690540344,
+        -0.00318954826344167,
+        -0.00250135961007347,
+        -0.002696302595414454,
+        0.001068620718174723,
+        0.00922184363699398,
+        0.0025991418671549526,
+        0.003369220762040015,
+        0.0008293794721723788,
+        -9.090436651334429e-05,
+        -0.0005569957842257283,
+        0.005008956526633534,
+        0.0006630056928589264,
+        -0.0027738826216745474,
+        -0.0023305806338253547,
+        -0.0007937234838401387,
+        0.004639855743887724,
+        -0.0026762266803818345,
+        0.00013712858382780612,
+        -3.8278409574700105e-05,
+        0.00037359648768749793,
+        0.0011443554359356863,
+        0.002064521391146075,
+        -0.0010072589592257104,
+        0.001635421321462567,
+        9.295495537000761e-05,
+        0.005124441233061103,
+        0.005457180858234279,
+        -0.0039573358204469215,
+        -0.0015389315637149173,
+        -0.00034709596485210604,
+        5.775802189172302e-05,
+        3.593543304600299e-05,
+        0.009305749922823191,
+        0.0009271625763761651,
+        0.0,
+        0.009838420313226914,
+        0.049659118130122894,
+        0.00982200786546297,
+        0.0816858572967272,
+        0.014717163482179793,
+        0.0,
+        -0.07740426309430536,
+        0.0,
+        -1.1034016530751275e-05,
+        -7.486114522649535e-06,
+        0.0,
+        -0.005720053483904455,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0007699184269818091,
+        0.000251206752574712,
+        5.1475757170479836e-05,
+        0.0015328625779447258,
+        0.0,
+        0.0025253066641564383,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.00216256334608705,
+        -0.001532157925353282,
+        0.0009499243567339161,
+        0.009589987364590739,
+        0.015402691907493157
+      ],
+      "shap_base": -0.4926742541460766,
+      "shap_margin": 1.6206253319049966,
+      "shap_top_indices": [
+        41,
+        40,
+        39,
+        19,
+        8,
+        7,
+        92,
+        95,
+        11,
+        16
+      ],
+      "shap_other_sum": 0.2930353180919161,
+      "shap_top10_coverage": 0.8032760743804855,
+      "shap_repeat_max_abs_delta": 0.0,
+      "lime_runs": [
+        {
+          "seed": 42,
+          "r2": 0.4893618348919997,
+          "intercept": 0.4252963309709006,
+          "local_prediction": 0.582780217962201,
+          "indices": [
+            41,
+            40,
+            103,
+            39,
+            105,
+            99,
+            107,
+            97,
+            115,
+            106
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21645815939668883
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.12947414550982694
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.09075391088067718
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0837622864779155
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.0834437480593258
+            },
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.07599341299560229
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.07576169033875615
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.07468865884721487
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.03473394700463472
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": -0.003722832385571409
+            }
+          ]
+        },
+        {
+          "seed": 43,
+          "r2": 0.5279456807882392,
+          "intercept": 0.3494241732024381,
+          "local_prediction": 0.6059377563043569,
+          "indices": [
+            41,
+            40,
+            106,
+            39,
+            113,
+            99,
+            105,
+            112,
+            101,
+            107
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.2325477729994217
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13046168441701478
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": -0.11236574575036236
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08925475483988235
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.0847389147533003
+            },
+            {
+              "condition": "FLAG_DOCUMENT_7 <= 0.00",
+              "weight": -0.06303801333564886
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.05842595591174817
+            },
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.05243580616021158
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": -0.045784180172094034
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.0006855372149543781
+            }
+          ]
+        },
+        {
+          "seed": 44,
+          "r2": 0.5544545998743295,
+          "intercept": -0.11909438806751377,
+          "local_prediction": 0.719752861129378,
+          "indices": [
+            41,
+            40,
+            105,
+            39,
+            0,
+            92,
+            1,
+            8,
+            11,
+            96
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.20762525306583748
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1465059565024948
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.11890527409273734
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.0759019223092986
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05762109628299424
+            },
+            {
+              "condition": "DEF_60_CNT_SOCIAL_CIRCLE > 0.00",
+              "weight": 0.05006200601823812
+            },
+            {
+              "condition": "0.00 < CODE_GENDER <= 1.00",
+              "weight": 0.04804184899908824
+            },
+            {
+              "condition": "238500.00 < AMT_GOODS_PRICE <= 450000.00",
+              "weight": 0.04752443142051185
+            },
+            {
+              "condition": "2.00 < NAME_EDUCATION_TYPE <= 4.00",
+              "weight": 0.043762112150812625
+            },
+            {
+              "condition": "FLAG_DOCUMENT_4 <= 0.00",
+              "weight": 0.04289734835487838
+            }
+          ]
+        },
+        {
+          "seed": 45,
+          "r2": 0.5163399735210134,
+          "intercept": -0.21441873381090182,
+          "local_prediction": 0.5933413784483904,
+          "indices": [
+            41,
+            40,
+            105,
+            39,
+            112,
+            106,
+            101,
+            0,
+            107,
+            111
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.20805646914024503
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13782530110369032
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.12554487644068948
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09207357882185098
+            },
+            {
+              "condition": "FLAG_DOCUMENT_20 <= 0.00",
+              "weight": 0.06993655972026913
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.06957012249899823
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.06668256990586058
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05621456164193796
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.025098561458258454
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.006954634444009138
+            }
+          ]
+        },
+        {
+          "seed": 46,
+          "r2": 0.5355298373715768,
+          "intercept": 0.13121289660606383,
+          "local_prediction": 0.6015788802547386,
+          "indices": [
+            41,
+            40,
+            39,
+            110,
+            97,
+            111,
+            114,
+            113,
+            0,
+            115
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21198639891712703
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.14864057102620945
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09101683465312779
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.08653934461165494
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.07920707331707726
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": 0.07391892776846792
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": -0.0724022104297235
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": -0.06805895499392603
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05712759956361104
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": 0.020804545849203396
+            }
+          ]
+        },
+        {
+          "seed": 47,
+          "r2": 0.5044474704058373,
+          "intercept": 0.04841947178696043,
+          "local_prediction": 0.6033336319544349,
+          "indices": [
+            41,
+            40,
+            0,
+            39,
+            101,
+            11,
+            107,
+            103,
+            116,
+            106
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.2068443936442092
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1314743959769521
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.07472458208156636
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.06809651225193382
+            },
+            {
+              "condition": "FLAG_DOCUMENT_9 <= 0.00",
+              "weight": 0.052423361022244
+            },
+            {
+              "condition": "2.00 < NAME_EDUCATION_TYPE <= 4.00",
+              "weight": 0.04869976816275095
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": -0.043175621089112104
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.03734325132879071
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_WEEK <= 0.00",
+              "weight": 0.032679021801867394
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.020490997643853422
+            }
+          ]
+        },
+        {
+          "seed": 48,
+          "r2": 0.4664228217102434,
+          "intercept": -0.09550248678910883,
+          "local_prediction": 0.5813903703446497,
+          "indices": [
+            41,
+            40,
+            39,
+            103,
+            110,
+            97,
+            9,
+            0,
+            106,
+            105
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.1934135677129173
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.14085134135312838
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08663788709172808
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": 0.07524248078145508
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.06923254951129201
+            },
+            {
+              "condition": "FLAG_DOCUMENT_5 <= 0.00",
+              "weight": -0.0662445620561724
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.05335952351985929
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.048003499193412826
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.04339930107205758
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.03299726895408022
+            }
+          ]
+        },
+        {
+          "seed": 49,
+          "r2": 0.5116021068358483,
+          "intercept": 0.03699085595441437,
+          "local_prediction": 0.5874677514207238,
+          "indices": [
+            41,
+            40,
+            39,
+            106,
+            103,
+            32,
+            110,
+            105,
+            114,
+            113
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.21328269229943886
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13511806413566857
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09411329374857323
+            },
+            {
+              "condition": "FLAG_DOCUMENT_14 <= 0.00",
+              "weight": 0.06561192056491635
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.06524983799809593
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": -0.05911449026800971
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.054486806768336365
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.05378177146180925
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_HOUR <= 0.00",
+              "weight": 0.03538367506335937
+            },
+            {
+              "condition": "FLAG_DOCUMENT_21 <= 0.00",
+              "weight": 0.02306299969031311
+            }
+          ]
+        },
+        {
+          "seed": 50,
+          "r2": 0.5128092416234113,
+          "intercept": 0.1500231272200819,
+          "local_prediction": 0.6467676362337459,
+          "indices": [
+            41,
+            40,
+            103,
+            39,
+            110,
+            105,
+            92,
+            0,
+            29,
+            115
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.2162787400591403
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.13362497122491135
+            },
+            {
+              "condition": "FLAG_DOCUMENT_11 <= 0.00",
+              "weight": -0.08491789248797534
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.08387325700850133
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.07589469580400464
+            },
+            {
+              "condition": "FLAG_DOCUMENT_13 <= 0.00",
+              "weight": 0.0619220197452967
+            },
+            {
+              "condition": "DEF_60_CNT_SOCIAL_CIRCLE > 0.00",
+              "weight": 0.05104741414695165
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.04945964602449646
+            },
+            {
+              "condition": "REGION_RATING_CLIENT_W_CITY <= 2.00",
+              "weight": -0.04795909414273333
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.04247924836892973
+            }
+          ]
+        },
+        {
+          "seed": 51,
+          "r2": 0.4933419190192444,
+          "intercept": -0.0891581803863209,
+          "local_prediction": 0.5900094213320874,
+          "indices": [
+            41,
+            40,
+            107,
+            110,
+            39,
+            32,
+            0,
+            111,
+            115,
+            9
+          ],
+          "terms": [
+            {
+              "condition": "EXT_SOURCE_3 <= 0.42",
+              "weight": 0.20659133182772754
+            },
+            {
+              "condition": "EXT_SOURCE_2 <= 0.39",
+              "weight": 0.1310084440041423
+            },
+            {
+              "condition": "FLAG_DOCUMENT_15 <= 0.00",
+              "weight": 0.10358822577782839
+            },
+            {
+              "condition": "FLAG_DOCUMENT_18 <= 0.00",
+              "weight": 0.09933587112901418
+            },
+            {
+              "condition": "EXT_SOURCE_1 <= 0.51",
+              "weight": 0.09544538242052189
+            },
+            {
+              "condition": "REG_REGION_NOT_LIVE_REGION <= 0.00",
+              "weight": 0.05413992167961553
+            },
+            {
+              "condition": "NAME_CONTRACT_TYPE <= 0.00",
+              "weight": 0.05168708114206788
+            },
+            {
+              "condition": "FLAG_DOCUMENT_19 <= 0.00",
+              "weight": -0.0342908925620541
+            },
+            {
+              "condition": "AMT_REQ_CREDIT_BUREAU_DAY <= 0.00",
+              "weight": -0.02905751170452811
+            },
+            {
+              "condition": "NAME_TYPE_SUITE <= 6.00",
+              "weight": 0.0007197480040727974
+            }
+          ]
+        }
+      ],
+      "lime_fixed_seed_repeat_max_abs_delta": 0.0,
+      "lime_10_seed_mean_pairwise_jaccard": 0.3852869352869352
+    }
+  ],
+  "model_params": {
+    "objective": "binary",
+    "metric": "auc",
+    "boosting_type": "gbdt",
+    "num_leaves": 31,
+    "learning_rate": 0.05,
+    "feature_fraction": 0.9,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 5,
+    "scale_pos_weight": 11.387084592145015,
+    "verbose": -1,
+    "random_state": 42,
+    "num_threads": 4
+  },
+  "num_boost_round": 1000,
+  "early_stopping_rounds": 50,
+  "trained_iterations": 190,
+  "raw_test_auc": 0.7596476228573307,
+  "split_sizes": [
+    196806,
+    49202,
+    61503
+  ],
+  "dataset_shape": [
+    307511,
+    122
+  ],
+  "selection": "First two accepted and first two rejected in the original seed-42 1000-row test sample among applicants whose raw-input and median-filled decisions agree at 0.5. No explanation metrics or true labels used for selection.",
+  "preprocessing_class_flips_in_sample": 149,
+  "excluded_preprocessing_flip_ids": [
+    116731,
+    131190,
+    400446,
+    164968,
+    430958,
+    277206,
+    126208,
+    234406,
+    106597,
+    379419,
+    225350,
+    304411,
+    342952,
+    218894,
+    442561,
+    381502,
+    166886,
+    127871,
+    443620,
+    185163,
+    442785,
+    323639,
+    161735,
+    162199,
+    198924,
+    115645,
+    106291,
+    359939,
+    419595,
+    262813,
+    223946,
+    350782,
+    447439,
+    174180,
+    165347,
+    434426,
+    110870,
+    358492,
+    437784,
+    331255,
+    253172,
+    139176,
+    416324,
+    170351,
+    392705,
+    152559,
+    378770,
+    424250,
+    113473,
+    415772,
+    433608,
+    183778,
+    133634,
+    391372,
+    276081,
+    292530,
+    348411,
+    166727,
+    399361,
+    455284,
+    258798,
+    276756,
+    324739,
+    175879,
+    293595,
+    238979,
+    372991,
+    233808,
+    272400,
+    371337,
+    182771,
+    140627,
+    312697,
+    308383,
+    415495,
+    363925,
+    402804,
+    452928,
+    108955,
+    157099,
+    221046,
+    394745,
+    339790,
+    432885,
+    135132,
+    260827,
+    257447,
+    365825,
+    443763,
+    301691,
+    217945,
+    268593,
+    325606,
+    117473,
+    336608,
+    186616,
+    375080,
+    434821,
+    444454,
+    396222,
+    168283,
+    134401,
+    426056,
+    384582,
+    388147,
+    272526,
+    103821,
+    118431,
+    444395,
+    204266,
+    297923,
+    347885,
+    333331,
+    294465,
+    185204,
+    105838,
+    225004,
+    116074,
+    276816,
+    296983,
+    105086,
+    327144,
+    375344,
+    375518,
+    411141,
+    440771,
+    397819,
+    106240,
+    317123,
+    225435,
+    253867,
+    363766,
+    392556,
+    412928,
+    209345,
+    314226,
+    379338,
+    309880,
+    103244,
+    265780,
+    251672,
+    183243,
+    160195,
+    301307,
+    162245,
+    239834,
+    250651,
+    108760,
+    299232
+  ],
+  "input_policy": "Both methods explain identical training-median-filled inputs. Original code used raw NaN inputs for SHAP and filled inputs for LIME.",
+  "lime_settings": {
+    "num_features": 10,
+    "num_samples": 1000,
+    "discretize_continuous": true,
+    "kernel_width": 8.215838362577491,
+    "categorical_features": null,
+    "figure_seed": 42,
+    "repeat_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "per_instance_pristine_explainer": true
+  },
+  "versions": {
+    "lightgbm": "4.7.0",
+    "shap": "0.51.0",
+    "lime": "0.2.0.1",
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "matplotlib": "3.11.1"
+  },
+  "python": "3.11.16 (main, Aug 14 2026, 15:34:35) [MSC v.1944 64 bit (AMD64)]",
+  "model_sha256": "734331aeef30d7be1e4a2c5968df946528111abfa6cd13adfffe7c19ec5e2e0f",
+  "dataset_sha256": "5b853f37fb6814cd4f844aee8eb961b17baadde5899ed3b1bcab9e00d8a10347",
+  "source_code_sha256": "486938a9f57db801c10afd1fe572e28045e17818fd7962f72c7af5aaf0e8d83a",
+  "category_mappings": {
+    "NAME_CONTRACT_TYPE": [
+      "Cash loans",
+      "Revolving loans"
+    ],
+    "CODE_GENDER": [
+      "F",
+      "M",
+      "XNA"
+    ],
+    "FLAG_OWN_CAR": [
+      "N",
+      "Y"
+    ],
+    "FLAG_OWN_REALTY": [
+      "N",
+      "Y"
+    ],
+    "NAME_TYPE_SUITE": [
+      "Children",
+      "Family",
+      "Group of people",
+      "Other_A",
+      "Other_B",
+      "Spouse, partner",
+      "Unaccompanied",
+      null
+    ],
+    "NAME_INCOME_TYPE": [
+      "Businessman",
+      "Commercial associate",
+      "Maternity leave",
+      "Pensioner",
+      "State servant",
+      "Student",
+      "Unemployed",
+      "Working"
+    ],
+    "NAME_EDUCATION_TYPE": [
+      "Academic degree",
+      "Higher education",
+      "Incomplete higher",
+      "Lower secondary",
+      "Secondary / secondary special"
+    ],
+    "NAME_FAMILY_STATUS": [
+      "Civil marriage",
+      "Married",
+      "Separated",
+      "Single / not married",
+      "Unknown",
+      "Widow"
+    ],
+    "NAME_HOUSING_TYPE": [
+      "Co-op apartment",
+      "House / apartment",
+      "Municipal apartment",
+      "Office apartment",
+      "Rented apartment",
+      "With parents"
+    ],
+    "OCCUPATION_TYPE": [
+      "Accountants",
+      "Cleaning staff",
+      "Cooking staff",
+      "Core staff",
+      "Drivers",
+      "HR staff",
+      "High skill tech staff",
+      "IT staff",
+      "Laborers",
+      "Low-skill Laborers",
+      "Managers",
+      "Medicine staff",
+      "Private service staff",
+      "Realty agents",
+      "Sales staff",
+      "Secretaries",
+      "Security staff",
+      "Waiters/barmen staff",
+      null
+    ],
+    "WEEKDAY_APPR_PROCESS_START": [
+      "FRIDAY",
+      "MONDAY",
+      "SATURDAY",
+      "SUNDAY",
+      "THURSDAY",
+      "TUESDAY",
+      "WEDNESDAY"
+    ],
+    "ORGANIZATION_TYPE": [
+      "Advertising",
+      "Agriculture",
+      "Bank",
+      "Business Entity Type 1",
+      "Business Entity Type 2",
+      "Business Entity Type 3",
+      "Cleaning",
+      "Construction",
+      "Culture",
+      "Electricity",
+      "Emergency",
+      "Government",
+      "Hotel",
+      "Housing",
+      "Industry: type 1",
+      "Industry: type 10",
+      "Industry: type 11",
+      "Industry: type 12",
+      "Industry: type 13",
+      "Industry: type 2",
+      "Industry: type 3",
+      "Industry: type 4",
+      "Industry: type 5",
+      "Industry: type 6",
+      "Industry: type 7",
+      "Industry: type 8",
+      "Industry: type 9",
+      "Insurance",
+      "Kindergarten",
+      "Legal Services",
+      "Medicine",
+      "Military",
+      "Mobile",
+      "Other",
+      "Police",
+      "Postal",
+      "Realtor",
+      "Religion",
+      "Restaurant",
+      "School",
+      "Security",
+      "Security Ministries",
+      "Self-employed",
+      "Services",
+      "Telecom",
+      "Trade: type 1",
+      "Trade: type 2",
+      "Trade: type 3",
+      "Trade: type 4",
+      "Trade: type 5",
+      "Trade: type 6",
+      "Trade: type 7",
+      "Transport: type 1",
+      "Transport: type 2",
+      "Transport: type 3",
+      "Transport: type 4",
+      "University",
+      "XNA"
+    ],
+    "FONDKAPREMONT_MODE": [
+      "not specified",
+      "org spec account",
+      "reg oper account",
+      "reg oper spec account",
+      null
+    ],
+    "HOUSETYPE_MODE": [
+      "block of flats",
+      "specific housing",
+      "terraced house",
+      null
+    ],
+    "WALLSMATERIAL_MODE": [
+      "Block",
+      "Mixed",
+      "Monolithic",
+      "Others",
+      "Panel",
+      "Stone, brick",
+      "Wooden",
+      null
+    ],
+    "EMERGENCYSTATE_MODE": [
+      "No",
+      "Yes",
+      null
+    ]
+  },
+  "training_medians": {
+    "NAME_CONTRACT_TYPE": 0.0,
+    "CODE_GENDER": 0.0,
+    "FLAG_OWN_CAR": 0.0,
+    "FLAG_OWN_REALTY": 1.0,
+    "CNT_CHILDREN": 0.0,
+    "AMT_INCOME_TOTAL": 148500.0,
+    "AMT_CREDIT": 513531.0,
+    "AMT_ANNUITY": 24903.0,
+    "AMT_GOODS_PRICE": 450000.0,
+    "NAME_TYPE_SUITE": 6.0,
+    "NAME_INCOME_TYPE": 7.0,
+    "NAME_EDUCATION_TYPE": 4.0,
+    "NAME_FAMILY_STATUS": 1.0,
+    "NAME_HOUSING_TYPE": 1.0,
+    "REGION_POPULATION_RELATIVE": 0.01885,
+    "DAYS_BIRTH": -15750.0,
+    "DAYS_EMPLOYED": -1219.0,
+    "DAYS_REGISTRATION": -4503.0,
+    "DAYS_ID_PUBLISH": -3257.0,
+    "OWN_CAR_AGE": 9.0,
+    "FLAG_MOBIL": 1.0,
+    "FLAG_EMP_PHONE": 1.0,
+    "FLAG_WORK_PHONE": 0.0,
+    "FLAG_CONT_MOBILE": 1.0,
+    "FLAG_PHONE": 0.0,
+    "FLAG_EMAIL": 0.0,
+    "OCCUPATION_TYPE": 10.0,
+    "CNT_FAM_MEMBERS": 2.0,
+    "REGION_RATING_CLIENT": 2.0,
+    "REGION_RATING_CLIENT_W_CITY": 2.0,
+    "WEEKDAY_APPR_PROCESS_START": 4.0,
+    "HOUR_APPR_PROCESS_START": 12.0,
+    "REG_REGION_NOT_LIVE_REGION": 0.0,
+    "REG_REGION_NOT_WORK_REGION": 0.0,
+    "LIVE_REGION_NOT_WORK_REGION": 0.0,
+    "REG_CITY_NOT_LIVE_CITY": 0.0,
+    "REG_CITY_NOT_WORK_CITY": 0.0,
+    "LIVE_CITY_NOT_WORK_CITY": 0.0,
+    "ORGANIZATION_TYPE": 33.0,
+    "EXT_SOURCE_1": 0.505153862331764,
+    "EXT_SOURCE_2": 0.5658163831199711,
+    "EXT_SOURCE_3": 0.5352762504724826,
+    "APARTMENTS_AVG": 0.0876,
+    "BASEMENTAREA_AVG": 0.0762,
+    "YEARS_BEGINEXPLUATATION_AVG": 0.9816,
+    "YEARS_BUILD_AVG": 0.7552,
+    "COMMONAREA_AVG": 0.0211,
+    "ELEVATORS_AVG": 0.0,
+    "ENTRANCES_AVG": 0.1379,
+    "FLOORSMAX_AVG": 0.1667,
+    "FLOORSMIN_AVG": 0.2083,
+    "LANDAREA_AVG": 0.048,
+    "LIVINGAPARTMENTS_AVG": 0.0756,
+    "LIVINGAREA_AVG": 0.0742,
+    "NONLIVINGAPARTMENTS_AVG": 0.0,
+    "NONLIVINGAREA_AVG": 0.0036,
+    "APARTMENTS_MODE": 0.084,
+    "BASEMENTAREA_MODE": 0.0745,
+    "YEARS_BEGINEXPLUATATION_MODE": 0.9816,
+    "YEARS_BUILD_MODE": 0.7648,
+    "COMMONAREA_MODE": 0.019,
+    "ELEVATORS_MODE": 0.0,
+    "ENTRANCES_MODE": 0.1379,
+    "FLOORSMAX_MODE": 0.1667,
+    "FLOORSMIN_MODE": 0.2083,
+    "LANDAREA_MODE": 0.0457,
+    "LIVINGAPARTMENTS_MODE": 0.0762,
+    "LIVINGAREA_MODE": 0.073,
+    "NONLIVINGAPARTMENTS_MODE": 0.0,
+    "NONLIVINGAREA_MODE": 0.0011,
+    "APARTMENTS_MEDI": 0.0864,
+    "BASEMENTAREA_MEDI": 0.0757,
+    "YEARS_BEGINEXPLUATATION_MEDI": 0.9816,
+    "YEARS_BUILD_MEDI": 0.7585,
+    "COMMONAREA_MEDI": 0.0208,
+    "ELEVATORS_MEDI": 0.0,
+    "ENTRANCES_MEDI": 0.1379,
+    "FLOORSMAX_MEDI": 0.1667,
+    "FLOORSMIN_MEDI": 0.2083,
+    "LANDAREA_MEDI": 0.0485,
+    "LIVINGAPARTMENTS_MEDI": 0.0761,
+    "LIVINGAREA_MEDI": 0.0746,
+    "NONLIVINGAPARTMENTS_MEDI": 0.0,
+    "NONLIVINGAREA_MEDI": 0.0031,
+    "FONDKAPREMONT_MODE": 4.0,
+    "HOUSETYPE_MODE": 3.0,
+    "TOTALAREA_MODE": 0.0687,
+    "WALLSMATERIAL_MODE": 7.0,
+    "EMERGENCYSTATE_MODE": 0.0,
+    "OBS_30_CNT_SOCIAL_CIRCLE": 0.0,
+    "DEF_30_CNT_SOCIAL_CIRCLE": 0.0,
+    "OBS_60_CNT_SOCIAL_CIRCLE": 0.0,
+    "DEF_60_CNT_SOCIAL_CIRCLE": 0.0,
+    "DAYS_LAST_PHONE_CHANGE": -757.0,
+    "FLAG_DOCUMENT_2": 0.0,
+    "FLAG_DOCUMENT_3": 1.0,
+    "FLAG_DOCUMENT_4": 0.0,
+    "FLAG_DOCUMENT_5": 0.0,
+    "FLAG_DOCUMENT_6": 0.0,
+    "FLAG_DOCUMENT_7": 0.0,
+    "FLAG_DOCUMENT_8": 0.0,
+    "FLAG_DOCUMENT_9": 0.0,
+    "FLAG_DOCUMENT_10": 0.0,
+    "FLAG_DOCUMENT_11": 0.0,
+    "FLAG_DOCUMENT_12": 0.0,
+    "FLAG_DOCUMENT_13": 0.0,
+    "FLAG_DOCUMENT_14": 0.0,
+    "FLAG_DOCUMENT_15": 0.0,
+    "FLAG_DOCUMENT_16": 0.0,
+    "FLAG_DOCUMENT_17": 0.0,
+    "FLAG_DOCUMENT_18": 0.0,
+    "FLAG_DOCUMENT_19": 0.0,
+    "FLAG_DOCUMENT_20": 0.0,
+    "FLAG_DOCUMENT_21": 0.0,
+    "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+    "AMT_REQ_CREDIT_BUREAU_DAY": 0.0,
+    "AMT_REQ_CREDIT_BUREAU_WEEK": 0.0,
+    "AMT_REQ_CREDIT_BUREAU_MON": 0.0,
+    "AMT_REQ_CREDIT_BUREAU_QRT": 0.0,
+    "AMT_REQ_CREDIT_BUREAU_YEAR": 1.0
+  }
+}

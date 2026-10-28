@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the research manuscript and this repository when referring to these materials."
+type: software
+title: "Compliance Scoring Framework: SHAP VS LIME"
+authors:
+  - family-names: Lamsal
+    given-names: Samrat
+  - family-names: De
+    given-names: Sumana
+  - family-names: Poudel
+    given-names: Sulav
+repository-code: "https://github.com/Samrat17ab/Compliance-Scoring-Framework-SHAP-VS-LIME"
+url: "https://github.com/Samrat17ab/Compliance-Scoring-Framework-SHAP-VS-LIME"
+abstract: "Research artifacts for a Compliance Scoring Framework evaluating SHAP and LIME in high-risk credit scoring, including the manuscript, original code, supplemental corrections, saved explanations, and verification tests."
+keywords:
+  - explainable AI
+  - SHAP
+  - LIME
+  - credit scoring
+  - reproducibility

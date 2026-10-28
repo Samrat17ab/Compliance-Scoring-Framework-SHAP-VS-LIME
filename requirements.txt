@@ -1,0 +1,8 @@
+-r requirements-verify.txt
+pandas==3.0.5
+scikit-learn==1.9.0
+shap==0.51.0
+lime==0.2.0.1
+matplotlib==3.11.1
+seaborn==0.13.2
+threadpoolctl==3.6.0

@@ -1,0 +1,17 @@
+test_artifact_checksums (test_artifacts.EvidenceChecks.test_artifact_checksums) ... ok
+test_corrected_paired_wilcoxon (test_artifacts.EvidenceChecks.test_corrected_paired_wilcoxon) ... ok
+test_corrected_scores_and_monte_carlo (test_artifacts.EvidenceChecks.test_corrected_scores_and_monte_carlo) ... ok
+test_example_selection_matches_prespecified_rule (test_artifacts.EvidenceChecks.test_example_selection_matches_prespecified_rule) ... ok
+test_explanation_composition_and_gender_counts (test_artifacts.EvidenceChecks.test_explanation_composition_and_gender_counts) ... ok
+test_lime_gap_aggregates_and_representation (test_artifacts.EvidenceChecks.test_lime_gap_aggregates_and_representation) ... ok
+test_sample_identity_dimensions_and_model_hash (test_artifacts.EvidenceChecks.test_sample_identity_dimensions_and_model_hash) ... ok
+test_saved_model_predictions_and_shap_reconstruction (test_artifacts.EvidenceChecks.test_saved_model_predictions_and_shap_reconstruction) ... ok
+test_scientific_source_preservation_and_syntax (test_artifacts.EvidenceChecks.test_scientific_source_preservation_and_syntax) ... ok
+test_selected_manuscript (test_artifacts.EvidenceChecks.test_selected_manuscript) ... ok
+test_shap_top_ten_matches_full_attribution_array (test_artifacts.EvidenceChecks.test_shap_top_ten_matches_full_attribution_array) ... ok
+test_summary_figures_have_expected_dimensions (test_artifacts.EvidenceChecks.test_summary_figures_have_expected_dimensions) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.757s
+
+OK

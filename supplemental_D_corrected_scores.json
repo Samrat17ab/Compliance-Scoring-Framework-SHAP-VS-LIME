@@ -1,0 +1,45 @@
+{
+  "shap_scores": {
+    "C1_Coverage": 3.0,
+    "C2_Consistency": 5.0,
+    "C3a_Complexity": 4.0,
+    "C3b_Comprehension": 2.0,
+    "C4_Bias": 4.0,
+    "C5_Fairness": 5.0,
+    "C6_Oversight": 4.0,
+    "C7_Auditability": 5.0
+  },
+  "lime_scores": {
+    "C1_Fidelity": 1.5,
+    "C2_Consistency": 1.0,
+    "C3a_Complexity": 1.0,
+    "C3b_Comprehension": 4.0,
+    "C4_Bias": 2.0,
+    "C5_Fairness": 5.0,
+    "C6_Oversight": 3.5,
+    "C7_Auditability": 2.0
+  },
+  "shap_overall": 4.0,
+  "lime_overall": 2.5,
+  "c4_fold": 4.914952681388013,
+  "c4_shap_prob_gap": 0.038951,
+  "monte_carlo": {
+    "shap_wins": 2963,
+    "n_sim": 3000,
+    "robustness_ratio": 0.9876666666666667
+  },
+  "threshold_perturbation": [
+    {
+      "direction": "up",
+      "shap_score": 4.0,
+      "lime_score": 2.1,
+      "shap_wins": true
+    },
+    {
+      "direction": "down",
+      "shap_score": 3.8,
+      "lime_score": 2.1,
+      "shap_wins": true
+    }
+  ]
+}

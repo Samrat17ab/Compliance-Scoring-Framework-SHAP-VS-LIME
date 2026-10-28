@@ -1,0 +1,1480 @@
+#!/usr/bin/env python3
+"""
+CSF Evaluation — Complete Script (Training + Evaluation + Figures)
+===================================================================
+Run this single file. It covers:
+  STEP 1 — Data loading and preprocessing
+  STEP 2 — Model training (LR, RF, LightGBM) and selection
+  STEP 3 — SHAP analysis (C1–C5)
+  STEP 4 — LIME analysis (C1–C5), n=1000, all corrections applied
+  STEP 5 — Kernel width sweep (Fig 1)
+  STEP 6 — Fixed-seed LIME consistency (Fig 2)
+  STEP 7 — CSF scoring (C1–C7)
+  STEP 8 — Figure generation (Fig 1–4)
+
+Required input file:
+  application_train.csv  — Home Credit Default Risk dataset from Kaggle
+
+All intermediate results are checkpointed to JSON.
+If the script is interrupted, comment out completed steps and re-run.
+
+Estimated total runtime: 4–7 hours (LIME is the bottleneck).
+"""
+
+# -----------------------------------------------------------------------------
+# IMPORTS
+# -----------------------------------------------------------------------------
+!pip install pandas numpy scikit-learn lightgbm shap lime matplotlib seaborn scipy textstat
+import json
+import os
+import pickle
+import warnings
+from itertools import combinations
+from math import pi
+
+import lightgbm as lgb
+import lime
+import lime.lime_tabular
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import shap
+from scipy import stats
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (roc_auc_score, precision_score,
+                              recall_score, f1_score)
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+
+warnings.filterwarnings('ignore')
+np.random.seed(42)
+
+# -----------------------------------------------------------------------------
+# CONSTANTS — edit only here
+# -----------------------------------------------------------------------------
+SAMPLE_N           = 1000   # instances for main SHAP & LIME analysis (same for both)
+SWEEP_N            = 200    # instances per kernel width configuration
+N_CONSIST          = 100    # instances for consistency test
+N_RUNS             = 10     # independent runs for consistency
+K                  = 10     # top-k features per explanation
+LIME_SAMPLES       = 1000   # LIME perturbation samples per instance
+RANDOM_STATE       = 42
+GENDER_COL         = 'CODE_GENDER'
+KERNEL_MULTIPLIERS = [0.25, 0.50, 0.75, 1.0, 1.5, 2.0, 3.0]
+
+# -----------------------------------------------------------------------------
+# HELPER FUNCTIONS
+# -----------------------------------------------------------------------------
+def jaccard(s1, s2):
+    union = s1 | s2
+    if not union:
+        return 1.0
+    return len(s1 & s2) / len(union)
+
+
+def structural_complexity(feature_name_list):
+    """
+    SC = 0.4*(F/10) + 0.4*(Nc/10) + 0.2*(L¯/20)
+
+    F  = number of features shown (always K=10)
+    Nc = features whose name contains a conditional operator
+         (>, <, <=, >=, =) — nonzero only for LIME condition strings
+    L¯  = mean character length of feature name strings
+
+    Lower SC = simpler = better compliance.
+    Paper Section III-C, Eq. (3). Nc/10 (not Nc/F) because F=10 always.
+    """
+    names = [str(n) for n in feature_name_list]
+    F     = len(names)
+    Nc    = sum(1 for n in names
+                if any(op in n for op in ['>', '<', '<=', '>=', '=']))
+    L_bar = float(np.mean([len(n) for n in names])) if names else 0.0
+    return 0.4 * (F / 10) + 0.4 * (Nc / 10) + 0.2 * (L_bar / 20)
+
+
+# Score-conversion functions — Table II thresholds
+def score_coverage(v):
+    if v >= 0.90: return 5.0
+    if v >= 0.80: return 4.0
+    if v >= 0.70: return 3.0
+    if v >= 0.60: return 2.0
+    return 1.0
+
+def score_fidelity(v):
+    if v >= 0.85: return 5.0
+    if v >= 0.75: return 4.0
+    if v >= 0.65: return 3.0
+    if v >= 0.55: return 2.0
+    return 1.5   # non-compliant but non-zero credit
+
+def score_jaccard(v):
+    if v >= 0.95: return 5.0
+    if v >= 0.85: return 4.0
+    if v >= 0.75: return 3.0
+    if v >= 0.60: return 2.0
+    return 1.0
+
+def score_complexity(v):   # lower = better
+    if v <= 0.40: return 5.0
+    if v <= 0.55: return 4.0
+    if v <= 0.70: return 3.0
+    if v <= 0.85: return 2.0
+    return 1.0
+
+def score_bias_gap(v):     # higher = better detection
+    if v >= 0.05:  return 5.0
+    if v >= 0.03:  return 4.0
+    if v >= 0.010: return 3.0
+    if v >= 0.005: return 2.0
+    return 1.0
+
+def score_disparity(v):    # model-level fairness surfaced by both methods
+    if v >= 0.05: return 5.0
+    if v >= 0.03: return 4.0
+    if v >= 0.01: return 3.0
+    return 2.0
+
+
+def checkpoint(data, filename):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=2)
+    print(f"  [CHECKPOINT] {filename} saved.")
+
+
+# -----------------------------------------------------------------------------
+# STEP 1 — DATA LOADING AND PREPROCESSING
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 1: DATA LOADING AND PREPROCESSING")
+print("=" * 65)
+
+df = pd.read_csv('/content/application_train.csv')
+print(f"Raw data shape: {df.shape}")
+
+y = df['TARGET']
+X = df.drop(['TARGET', 'SK_ID_CURR'], axis=1)
+
+# Drop only 100%-missing columns (not the common 40%-threshold)
+missing_frac = X.isnull().sum() / len(X)
+cols_to_drop = missing_frac[missing_frac == 1.0].index.tolist()
+X = X.drop(cols_to_drop, axis=1)
+print(f"After dropping 100%-missing cols: {X.shape}")
+
+# Label-encode all categorical columns
+for col in X.select_dtypes(include='object').columns:
+    le = LabelEncoder()
+    X[col] = le.fit_transform(X[col].astype(str))
+
+print(f"After encoding: {X.shape}")
+print(f"Class balance — 0: {(y==0).sum()}  1: {(y==1).sum()}  "
+      f"default rate: {y.mean()*100:.1f}%")
+
+# Stratified split: 64% train / 16% val / 20% test
+X_temp, X_test, y_temp, y_test = train_test_split(
+    X, y, test_size=0.20, random_state=RANDOM_STATE, stratify=y)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_temp, y_temp, test_size=0.20, random_state=RANDOM_STATE, stratify=y_temp)
+
+print(f"\nSplit sizes — Train: {X_train.shape}  "
+      f"Val: {X_val.shape}  Test: {X_test.shape}")
+
+# Compute fill values from TRAINING SET ONLY — used everywhere
+train_medians  = X_train.median(numeric_only=True)
+X_train_filled = X_train.fillna(train_medians)
+X_val_filled   = X_val.fillna(train_medians)
+X_test_filled  = X_test.fillna(train_medians)
+
+feature_names = list(X_train.columns)
+print(f"Features: {len(feature_names)}")
+
+# Save splits
+X_train.to_csv('X_train.csv', index=False)
+X_val.to_csv('X_val.csv', index=False)
+X_test.to_csv('X_test.csv', index=False)
+y_train.to_csv('y_train.csv', index=False)
+y_val.to_csv('y_val.csv', index=False)
+y_test.to_csv('y_test.csv', index=False)
+print("Train/val/test CSVs saved.")
+
+
+# -----------------------------------------------------------------------------
+# STEP 2 — MODEL TRAINING AND SELECTION
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 2: MODEL TRAINING")
+print("=" * 65)
+
+# Imputer for LR and RF (they cannot handle NaN)
+imputer     = SimpleImputer(strategy='median')
+Xtr_imp     = imputer.fit_transform(X_train)
+Xva_imp     = imputer.transform(X_val)
+Xte_imp     = imputer.transform(X_test)
+
+# -- Logistic Regression -------------------------------------------------------
+print("\nTraining Logistic Regression...")
+lr = LogisticRegression(max_iter=1000, class_weight='balanced',
+                         random_state=RANDOM_STATE, solver='lbfgs')
+lr.fit(Xtr_imp, y_train)
+lr_prob  = lr.predict_proba(Xte_imp)[:, 1]
+lr_pred  = (lr_prob >= 0.5).astype(int)
+lr_auc   = roc_auc_score(y_test, lr_prob)
+lr_prec  = precision_score(y_test, lr_pred, zero_division=0)
+lr_rec   = recall_score(y_test, lr_pred, zero_division=0)
+lr_f1    = f1_score(y_test, lr_pred, zero_division=0)
+print(f"  AUC={lr_auc:.3f}  Prec={lr_prec:.3f}  "
+      f"Rec={lr_rec:.3f}  F1={lr_f1:.3f}")
+
+# -- Random Forest -------------------------------------------------------------
+print("\nTraining Random Forest...")
+rf = RandomForestClassifier(
+    n_estimators=100, max_depth=10,
+    class_weight='balanced',
+    random_state=RANDOM_STATE, n_jobs=-1)
+rf.fit(Xtr_imp, y_train)
+rf_prob  = rf.predict_proba(Xte_imp)[:, 1]
+rf_pred  = (rf_prob >= 0.5).astype(int)
+rf_auc   = roc_auc_score(y_test, rf_prob)
+rf_prec  = precision_score(y_test, rf_pred, zero_division=0)
+rf_rec   = recall_score(y_test, rf_pred, zero_division=0)
+rf_f1    = f1_score(y_test, rf_pred, zero_division=0)
+print(f"  AUC={rf_auc:.3f}  Prec={rf_prec:.3f}  "
+      f"Rec={rf_rec:.3f}  F1={rf_f1:.3f}")
+
+# -- LightGBM (primary model) --------------------------------------------------
+print("\nTraining LightGBM...")
+scale_pw = (y_train == 0).sum() / (y_train == 1).sum()
+
+lgb_train_ds = lgb.Dataset(X_train, label=y_train)
+lgb_val_ds   = lgb.Dataset(X_val,   label=y_val, reference=lgb_train_ds)
+
+lgb_params = {
+    'objective':        'binary',
+    'metric':           'auc',
+    'boosting_type':    'gbdt',
+    'num_leaves':       31,
+    'learning_rate':    0.05,
+    'feature_fraction': 0.9,
+    'bagging_fraction': 0.8,
+    'bagging_freq':     5,
+    'scale_pos_weight': scale_pw,
+    'verbose':          -1,
+    'random_state':     RANDOM_STATE,
+}
+
+model = lgb.train(
+    lgb_params, lgb_train_ds,
+    num_boost_round=1000,
+    valid_sets=[lgb_val_ds],
+    callbacks=[lgb.early_stopping(50), lgb.log_evaluation(100)]
+)
+
+lgb_prob  = model.predict(X_test)
+lgb_pred  = (lgb_prob >= 0.5).astype(int)
+lgb_auc   = roc_auc_score(y_test, lgb_prob)
+lgb_prec  = precision_score(y_test, lgb_pred, zero_division=0)
+lgb_rec   = recall_score(y_test, lgb_pred, zero_division=0)
+lgb_f1    = f1_score(y_test, lgb_pred, zero_division=0)
+print(f"  AUC={lgb_auc:.3f}  Prec={lgb_prec:.3f}  "
+      f"Rec={lgb_rec:.3f}  F1={lgb_f1:.3f}")
+
+print(f"\n{'Model':<25} {'AUC':>6} {'Prec':>7} {'Rec':>7} {'F1':>7}")
+print("-" * 55)
+print(f"{'Logistic Regression':<25} {lr_auc:>6.3f} {lr_prec:>7.3f} "
+      f"{lr_rec:>7.3f} {lr_f1:>7.3f}")
+print(f"{'Random Forest':<25} {rf_auc:>6.3f} {rf_prec:>7.3f} "
+      f"{rf_rec:>7.3f} {rf_f1:>7.3f}")
+print(f"{'LightGBM ?':<25} {lgb_auc:>6.3f} {lgb_prec:>7.3f} "
+      f"{lgb_rec:>7.3f} {lgb_f1:>7.3f}")
+print("? Selected for XAI analysis (highest AUC, native TreeSHAP)")
+
+model.save_model('lgbm_model.txt')
+
+model_perf = {
+    'logistic_regression': {'auc': lr_auc, 'precision': lr_prec,
+                             'recall': lr_rec, 'f1': lr_f1},
+    'random_forest':        {'auc': rf_auc, 'precision': rf_prec,
+                             'recall': rf_rec, 'f1': rf_f1},
+    'lightgbm':             {'auc': lgb_auc, 'precision': lgb_prec,
+                             'recall': lgb_rec, 'f1': lgb_f1},
+}
+checkpoint(model_perf, 'model_performance.json')
+
+
+# -----------------------------------------------------------------------------
+# STEP 3 — PREPARE SHARED SAMPLES
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 3: PREPARING SHARED SAMPLES  (n=1000 for both SHAP and LIME)")
+print("=" * 65)
+
+# Both methods use the same 1000-instance sample drawn identically
+# raw    = NaN present  ? for TreeSHAP (handles NaN natively)
+# filled = NaN replaced ? for LIME (requires complete rows)
+X_sample_raw    = X_test.sample(
+    SAMPLE_N, random_state=RANDOM_STATE).reset_index(drop=True)
+X_sample_filled = X_test_filled.sample(
+    SAMPLE_N, random_state=RANDOM_STATE).reset_index(drop=True)
+
+# Consistency subset — same rows, same order
+X_consist_raw    = X_sample_raw.iloc[:N_CONSIST].copy()
+X_consist_filled = X_sample_filled.iloc[:N_CONSIST].copy()
+
+print(f"Main sample — raw NaN: {X_sample_raw.isnull().sum().sum()}")
+print(f"Main sample — filled NaN: {X_sample_filled.isnull().sum().sum()}")
+assert GENDER_COL in feature_names, f"{GENDER_COL} not found in features!"
+
+
+# -----------------------------------------------------------------------------
+# STEP 4 — SHAP ANALYSIS
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 4: SHAP ANALYSIS  (n=1000, TreeSHAP)")
+print("=" * 65)
+
+explainer   = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X_sample_raw)
+print(f"SHAP values shape: {shap_values.shape}")
+
+# -- C1 Attribution Coverage ---------------------------------------------------
+coverages = []
+for i in range(len(shap_values)):
+    abs_sv = np.abs(shap_values[i])
+    total  = abs_sv.sum()
+    if total == 0:
+        continue
+    coverages.append(np.sort(abs_sv)[::-1][:K].sum() / total)
+
+shap_c1_mean = float(np.mean(coverages))
+shap_c1_std  = float(np.std(coverages))
+print(f"\nC1 Coverage:       {shap_c1_mean:.4f} ± {shap_c1_std:.4f}")
+
+# -- C2 Consistency ------------------------------------------------------------
+print("\nC2 Consistency (10 runs × 100 instances)...")
+shap_runs = []
+for run in range(N_RUNS):
+    sv = explainer.shap_values(X_consist_raw)
+    shap_runs.append([
+        set(np.argsort(np.abs(sv[i]))[::-1][:K])
+        for i in range(N_CONSIST)
+    ])
+    print(f"  Run {run+1}/{N_RUNS}")
+
+shap_j_scores = [
+    jaccard(shap_runs[r1][s], shap_runs[r2][s])
+    for r1, r2 in combinations(range(N_RUNS), 2)
+    for s in range(N_CONSIST)
+]
+shap_c2_mean = float(np.mean(shap_j_scores))
+shap_c2_std  = float(np.std(shap_j_scores))
+print(f"C2 Consistency:    {shap_c2_mean:.4f} ± {shap_c2_std:.4f}")
+
+# -- C3a Structural Complexity -------------------------------------------------
+shap_complexities = []
+for i in range(len(shap_values)):
+    top_names = [feature_names[idx]
+                 for idx in np.argsort(np.abs(shap_values[i]))[::-1][:K]]
+    shap_complexities.append(structural_complexity(top_names))
+
+shap_c3a_mean = float(np.mean(shap_complexities))
+shap_c3a_std  = float(np.std(shap_complexities))
+print(f"C3a Complexity:    {shap_c3a_mean:.4f} ± {shap_c3a_std:.4f}")
+
+# -- C4 Bias Detection (signed, unconditional) ---------------------------------
+gender_idx   = feature_names.index(GENDER_COL)
+gender_shap  = shap_values[:, gender_idx]          # signed, all instances
+gender_vals  = X_sample_raw[GENDER_COL].values
+valid_mask   = ~np.isnan(gender_vals.astype(float))
+unique_g     = np.unique(gender_vals[valid_mask])
+
+shap_group_means = {
+    int(g): float(gender_shap[gender_vals == g].mean())
+    for g in unique_g
+}
+sk = sorted(shap_group_means.keys())
+shap_c4_gap = float(abs(shap_group_means[sk[0]] - shap_group_means[sk[1]]))
+print(f"C4 Bias gap:       {shap_c4_gap:.4f}  groups: {shap_group_means}")
+
+# -- C5 Fairness Transparency --------------------------------------------------
+# LightGBM handles NaN natively; use raw sample for model predictions
+preds_sample  = model.predict(X_sample_raw)
+gender_c5     = X_sample_raw[GENDER_COL].values
+shap_approval = {
+    int(g): float((preds_sample[gender_c5 == g] < 0.5).mean())
+    for g in unique_g
+}
+sk5          = sorted(shap_approval.keys())
+shap_c5_disp = float(abs(shap_approval[sk5[0]] - shap_approval[sk5[1]]))
+print(f"C5 Disparity:      {shap_c5_disp:.4f}  rates: {shap_approval}")
+
+shap_results = {
+    'c1_coverage_mean':    shap_c1_mean,
+    'c1_coverage_std':     shap_c1_std,
+    'c2_jaccard_mean':     shap_c2_mean,
+    'c2_jaccard_std':      shap_c2_std,
+    'c3a_complexity_mean': shap_c3a_mean,
+    'c3a_complexity_std':  shap_c3a_std,
+    'c4_bias_gap':         shap_c4_gap,
+    'c4_group_means':      {str(k): v for k, v in shap_group_means.items()},
+    'c5_disparity':        shap_c5_disp,
+    'c5_approval_rates':   {str(k): v for k, v in shap_approval.items()},
+}
+checkpoint(shap_results, 'shap_results.json')
+
+
+# -----------------------------------------------------------------------------
+# STEP 5 — LIME ANALYSIS  (n=1000, all corrections applied)
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 5: LIME ANALYSIS  (n=1000 — this is the slow section ~2-4h)")
+print("=" * 65)
+
+lime_explainer = lime.lime_tabular.LimeTabularExplainer(
+    training_data   = X_train_filled.values,
+    feature_names   = feature_names,
+    class_names     = ['Repaid', 'Default'],
+    mode            = 'classification',
+    discretize_continuous = True,
+    random_state    = RANDOM_STATE
+)
+
+def predict_fn(x):
+    df    = pd.DataFrame(x, columns=feature_names)
+    preds = model.predict(df)
+    return np.column_stack([1 - preds, preds])
+
+# -- Generate 1000 explanations ------------------------------------------------
+print(f"\nGenerating {SAMPLE_N} LIME explanations...")
+lime_explanations = []
+errors = 0
+for i in range(SAMPLE_N):
+    if i % 100 == 0:
+        print(f"  {i}/{SAMPLE_N}  errors={errors}")
+    try:
+        exp = lime_explainer.explain_instance(
+            data_row    = X_sample_filled.iloc[i].values,
+            predict_fn  = predict_fn,
+            num_features= K,
+            num_samples = LIME_SAMPLES
+        )
+        lime_explanations.append({
+            'features':  exp.as_list(),
+            'r_squared': float(exp.score),
+        })
+    except Exception as e:
+        errors += 1
+        lime_explanations.append(None)
+
+lime_explanations = [e for e in lime_explanations if e is not None]
+n_lime = len(lime_explanations)
+print(f"Successful: {n_lime}/{SAMPLE_N}  errors: {errors}")
+
+# -- C1 Local Fidelity R² -----------------------------------------------------
+r2_vals      = [e['r_squared'] for e in lime_explanations]
+lime_c1_mean = float(np.mean(r2_vals))
+lime_c1_std  = float(np.std(r2_vals))
+print(f"\nC1 Fidelity R²:    {lime_c1_mean:.4f} ± {lime_c1_std:.4f}")
+
+# -- C2 Stochastic Consistency -------------------------------------------------
+print("\nC2 Consistency (10 stochastic runs × 100 instances)...")
+lime_runs = []
+for run in range(N_RUNS):
+    print(f"  Stochastic run {run+1}/{N_RUNS}...")
+    run_feats = []
+    for i in range(N_CONSIST):
+        try:
+            exp = lime_explainer.explain_instance(
+                data_row    = X_consist_filled.iloc[i].values,
+                predict_fn  = predict_fn,
+                num_features= K,
+                num_samples = LIME_SAMPLES
+            )
+            run_feats.append(set(f[0] for f in exp.as_list()))
+        except:
+            run_feats.append(set())
+    lime_runs.append(run_feats)
+
+lime_j_scores = [
+    jaccard(lime_runs[r1][s], lime_runs[r2][s])
+    for r1, r2 in combinations(range(N_RUNS), 2)
+    for s in range(N_CONSIST)
+    if lime_runs[r1][s] or lime_runs[r2][s]
+]
+lime_c2_mean = float(np.mean(lime_j_scores))
+lime_c2_std  = float(np.std(lime_j_scores))
+print(f"C2 Consistency:    {lime_c2_mean:.4f} ± {lime_c2_std:.4f}")
+
+# -- C3a Structural Complexity -------------------------------------------------
+lime_complexities = [
+    structural_complexity([str(f[0]) for f in exp['features']])
+    for exp in lime_explanations
+]
+lime_c3a_mean = float(np.mean(lime_complexities))
+lime_c3a_std  = float(np.std(lime_complexities))
+print(f"C3a Complexity:    {lime_c3a_mean:.4f} ± {lime_c3a_std:.4f}")
+
+# -- C4 Bias Detection — CORRECTED --------------------------------------------
+# SIGNED weights; append 0.0 when gender is absent from top-10
+gender_vals_lime   = X_sample_filled.iloc[:n_lime][GENDER_COL].values
+gender_weights_sgn = {}
+gender_appearances = 0
+
+for i, exp in enumerate(lime_explanations):
+    g = int(gender_vals_lime[i])
+    if g not in gender_weights_sgn:
+        gender_weights_sgn[g] = []
+    found = False
+    for feat_name, weight in exp['features']:
+        if GENDER_COL.lower() in str(feat_name).lower():
+            gender_weights_sgn[g].append(float(weight))  # SIGNED
+            gender_appearances += 1
+            found = True
+            break
+    if not found:
+        gender_weights_sgn[g].append(0.0)                # ZERO-IMPUTE
+
+lime_group_means        = {g: float(np.mean(w))
+                            for g, w in gender_weights_sgn.items()}
+lk                      = sorted(lime_group_means.keys())
+lime_c4_gap             = float(abs(lime_group_means[lk[0]] -
+                                    lime_group_means[lk[1]]))
+lime_gender_appear_rate = float(gender_appearances / n_lime)
+
+print(f"C4 Bias gap:       {lime_c4_gap:.6f}  groups: {lime_group_means}")
+print(f"   Gender appear:  {gender_appearances}/{n_lime} "
+      f"({lime_gender_appear_rate*100:.1f}%)")
+
+# -- C5 Fairness Transparency --------------------------------------------------
+# C5 is a model-level property; identical for both methods by definition
+lime_approval = shap_approval
+lime_c5_disp  = shap_c5_disp
+print(f"C5 Disparity:      {lime_c5_disp:.4f}  (model-level, same as SHAP)")
+
+lime_results = {
+    'c1_fidelity_mean':      lime_c1_mean,
+    'c1_fidelity_std':       lime_c1_std,
+    'c2_jaccard_mean':       lime_c2_mean,
+    'c2_jaccard_std':        lime_c2_std,
+    'c3a_complexity_mean':   lime_c3a_mean,
+    'c3a_complexity_std':    lime_c3a_std,
+    'c4_bias_gap':           lime_c4_gap,
+    'c4_group_means':        {str(k): v for k, v in lime_group_means.items()},
+    'c4_gender_appear_rate': lime_gender_appear_rate,
+    'c4_gender_appearances': gender_appearances,
+    'c5_disparity':          lime_c5_disp,
+    'c5_approval_rates':     {str(k): v for k, v in lime_approval.items()},
+    'n_explanations':        n_lime,
+}
+checkpoint(lime_results, 'lime_results.json')
+
+
+# -----------------------------------------------------------------------------
+# STEP 6 — KERNEL WIDTH SWEEP  (Fig 1)
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 6: KERNEL WIDTH SWEEP  (~45 min)")
+print("=" * 65)
+
+n_features = X_train_filled.shape[1]
+default_kw = np.sqrt(n_features) * 0.75   # LIME's internal formula
+print(f"Default kernel width: sqrt({n_features}) × 0.75 = {default_kw:.4f}")
+
+kernel_results = {}
+for mult in KERNEL_MULTIPLIERS:
+    kw = default_kw * mult
+    print(f"\n  Kernel ×{mult}  (width={kw:.3f})...")
+    sweep_exp = lime.lime_tabular.LimeTabularExplainer(
+        training_data         = X_train_filled.values,
+        feature_names         = feature_names,
+        class_names           = ['Repaid', 'Default'],
+        mode                  = 'classification',
+        discretize_continuous = True,
+        kernel_width          = kw,
+        random_state          = RANDOM_STATE
+    )
+    r2_run = []
+    for i in range(SWEEP_N):
+        try:
+            exp = sweep_exp.explain_instance(
+                data_row    = X_sample_filled.iloc[i].values,
+                predict_fn  = predict_fn,
+                num_features= K,
+                num_samples = LIME_SAMPLES
+            )
+            r2_run.append(float(exp.score))
+        except:
+            pass
+    if r2_run:
+        kernel_results[mult] = {
+            'kernel_width': float(kw),
+            'r2_mean':      float(np.mean(r2_run)),
+            'r2_std':       float(np.std(r2_run)),
+            'r2_median':    float(np.median(r2_run)),
+            'n':            len(r2_run),
+        }
+        print(f"    R² = {np.mean(r2_run):.4f} ± {np.std(r2_run):.4f}")
+
+r2_all = [v['r2_mean'] for v in kernel_results.values()]
+print(f"\nR² range: {min(r2_all):.4f} – {max(r2_all):.4f}")
+checkpoint({str(k): v for k, v in kernel_results.items()},
+           'kernel_sweep_results.json')
+
+
+# -----------------------------------------------------------------------------
+# STEP 7 — FIXED-SEED LIME CONSISTENCY  (Fig 2)
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 7: FIXED-SEED LIME CONSISTENCY  (~40 min)")
+print("=" * 65)
+print("A FRESH explainer is created each run — RNG resets to same seed,")
+print("so runs are truly independent and deterministic.\n")
+
+fixed_runs = []
+for run in range(N_RUNS):
+    print(f"  Fixed-seed run {run+1}/{N_RUNS}...")
+    fresh_exp = lime.lime_tabular.LimeTabularExplainer(
+        training_data         = X_train_filled.values,
+        feature_names         = feature_names,
+        class_names           = ['Repaid', 'Default'],
+        mode                  = 'classification',
+        discretize_continuous = True,
+        random_state          = RANDOM_STATE    # same seed ? same RNG state
+    )
+    run_feats = []
+    for i in range(N_CONSIST):
+        try:
+            exp = fresh_exp.explain_instance(
+                data_row    = X_consist_filled.iloc[i].values,
+                predict_fn  = predict_fn,
+                num_features= K,
+                num_samples = LIME_SAMPLES
+            )
+            run_feats.append(set(f[0] for f in exp.as_list()))
+        except:
+            run_feats.append(set())
+    fixed_runs.append(run_feats)
+
+fixed_j_scores = [
+    jaccard(fixed_runs[r1][s], fixed_runs[r2][s])
+    for r1, r2 in combinations(range(N_RUNS), 2)
+    for s in range(N_CONSIST)
+    if fixed_runs[r1][s] or fixed_runs[r2][s]
+]
+fixed_c2_mean = float(np.mean(fixed_j_scores))
+fixed_c2_std  = float(np.std(fixed_j_scores))
+print(f"\nFixed-seed LIME: {fixed_c2_mean:.4f} ± {fixed_c2_std:.4f}")
+print(f"Stochastic LIME: {lime_c2_mean:.4f} ± {lime_c2_std:.4f}")
+print(f"SHAP:            {shap_c2_mean:.4f} ± {shap_c2_std:.4f}")
+checkpoint({'mean': fixed_c2_mean, 'std': fixed_c2_std}, 'fixed_seed_results.json')
+
+
+# -----------------------------------------------------------------------------
+# STEP 8 — CSF SCORING
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("STEP 8: CSF COMPLIANCE SCORING")
+print("=" * 65)
+
+shap_scores = {
+    'C1_Coverage':       score_coverage(shap_c1_mean),
+    'C2_Consistency':    score_jaccard(shap_c2_mean),
+    'C3a_Complexity':    score_complexity(shap_c3a_mean),
+    'C3b_Comprehension': 2.0,   # Qualitative: raw attributions less readable
+    'C4_Bias':           score_bias_gap(shap_c4_gap),
+    'C5_Fairness':       score_disparity(shap_c5_disp),
+    'C6_Oversight':      4.0,   # Qualitative: 4/4 checklist items
+    'C7_Auditability':   5.0,   # Mathematical determinism
+}
+
+lime_scores = {
+    'C1_Fidelity':       score_fidelity(lime_c1_mean),
+    'C2_Consistency':    score_jaccard(lime_c2_mean),
+    'C3a_Complexity':    score_complexity(lime_c3a_mean),
+    'C3b_Comprehension': 4.0,   # Qualitative: condition format more readable
+    'C4_Bias':           score_bias_gap(lime_c4_gap),
+    'C5_Fairness':       score_disparity(lime_c5_disp),
+    'C6_Oversight':      3.5,   # Qualitative: 3/4 checklist items
+    'C7_Auditability':   2.0,   # Stochastic: requires seed management
+}
+
+shap_overall = float(np.mean(list(shap_scores.values())))
+lime_overall = float(np.mean(list(lime_scores.values())))
+
+print(f"\n{'Criterion':<25} {'SHAP':>6} {'LIME':>6} {'?':>7}")
+print("-" * 47)
+for (cs, sv), (cl, lv) in zip(shap_scores.items(), lime_scores.items()):
+    print(f"{cs.replace('_',' '):<25} {sv:>6.1f} {lv:>6.1f} {sv-lv:>+7.1f}")
+print("-" * 47)
+print(f"{'Overall':<25} {shap_overall:>6.2f} {lime_overall:>6.2f} "
+      f"{shap_overall-lime_overall:>+7.2f}")
+
+u_stat, p_mw = stats.mannwhitneyu(
+    shap_j_scores, lime_j_scores, alternative='two-sided')
+print(f"\nMann-Whitney U (per-instance Jaccard): U={u_stat:.0f}, p={p_mw:.2e}")
+
+checkpoint({
+    'shap_scores':  shap_scores, 'lime_scores':  lime_scores,
+    'shap_overall': shap_overall, 'lime_overall': lime_overall,
+    'mann_whitney_U': float(u_stat), 'mann_whitney_p': float(p_mw),
+}, 'csf_scores.json')
+
+Result:
+Requirement already satisfied: pandas in /usr/local/lib/python3.12/dist-packages (2.2.2)
+Requirement already satisfied: numpy in /usr/local/lib/python3.12/dist-packages (2.0.2)
+Requirement already satisfied: scikit-learn in /usr/local/lib/python3.12/dist-packages (1.6.1)
+Requirement already satisfied: lightgbm in /usr/local/lib/python3.12/dist-packages (4.6.0)
+Requirement already satisfied: shap in /usr/local/lib/python3.12/dist-packages (0.51.0)
+Requirement already satisfied: lime in /usr/local/lib/python3.12/dist-packages (0.2.0.1)
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.12/dist-packages (3.10.0)
+Requirement already satisfied: seaborn in /usr/local/lib/python3.12/dist-packages (0.13.2)
+Requirement already satisfied: scipy in /usr/local/lib/python3.12/dist-packages (1.16.3)
+Requirement already satisfied: textstat in /usr/local/lib/python3.12/dist-packages (0.7.13)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.12/dist-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas) (2025.3)
+Requirement already satisfied: joblib>=1.2.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.1.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: tqdm>=4.27.0 in /usr/local/lib/python3.12/dist-packages (from shap) (4.67.3)
+Requirement already satisfied: packaging>20.9 in /usr/local/lib/python3.12/dist-packages (from shap) (26.0)
+Requirement already satisfied: slicer==0.0.8 in /usr/local/lib/python3.12/dist-packages (from shap) (0.0.8)
+Requirement already satisfied: numba in /usr/local/lib/python3.12/dist-packages (from shap) (0.60.0)
+Requirement already satisfied: llvmlite in /usr/local/lib/python3.12/dist-packages (from shap) (0.43.0)
+Requirement already satisfied: cloudpickle in /usr/local/lib/python3.12/dist-packages (from shap) (3.1.2)
+Requirement already satisfied: typing-extensions in /usr/local/lib/python3.12/dist-packages (from shap) (4.15.0)
+Requirement already satisfied: scikit-image>=0.12 in /usr/local/lib/python3.12/dist-packages (from lime) (0.25.2)
+Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib) (4.62.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib) (1.5.0)
+Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib) (11.3.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib) (3.3.2)
+Requirement already satisfied: pyphen in /usr/local/lib/python3.12/dist-packages (from textstat) (0.17.2)
+Requirement already satisfied: nltk in /usr/local/lib/python3.12/dist-packages (from textstat) (3.9.1)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from textstat) (75.2.0)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+Requirement already satisfied: networkx>=3.0 in /usr/local/lib/python3.12/dist-packages (from scikit-image>=0.12->lime) (3.6.1)
+Requirement already satisfied: imageio!=2.35.0,>=2.33 in /usr/local/lib/python3.12/dist-packages (from scikit-image>=0.12->lime) (2.37.3)
+Requirement already satisfied: tifffile>=2022.8.12 in /usr/local/lib/python3.12/dist-packages (from scikit-image>=0.12->lime) (2026.3.3)
+Requirement already satisfied: lazy-loader>=0.4 in /usr/local/lib/python3.12/dist-packages (from scikit-image>=0.12->lime) (0.5)
+Requirement already satisfied: click in /usr/local/lib/python3.12/dist-packages (from nltk->textstat) (8.3.1)
+Requirement already satisfied: regex>=2021.8.3 in /usr/local/lib/python3.12/dist-packages (from nltk->textstat) (2025.11.3)
+
+=================================================================
+STEP 1: DATA LOADING AND PREPROCESSING
+=================================================================
+Raw data shape: (307511, 122)
+After dropping 100%-missing cols: (307511, 120)
+After encoding: (307511, 120)
+Class balance — 0: 282686  1: 24825  default rate: 8.1%
+
+Split sizes — Train: (196806, 120)  Val: (49202, 120)  Test: (61503, 120)
+Features: 120
+Train/val/test CSVs saved.
+
+=================================================================
+STEP 2: MODEL TRAINING
+=================================================================
+
+Training Logistic Regression...
+  AUC=0.619  Prec=0.111  Rec=0.576  F1=0.186
+
+Training Random Forest...
+  AUC=0.733  Prec=0.169  Rec=0.594  F1=0.263
+
+Training LightGBM...
+Training until validation scores don't improve for 50 rounds
+[100]	valid_0's auc: 0.75193
+[200]	valid_0's auc: 0.754946
+Early stopping, best iteration is:
+[204]	valid_0's auc: 0.755119
+  AUC=0.759  Prec=0.170  Rec=0.679  F1=0.272
+
+Model                        AUC    Prec     Rec      F1
+-------------------------------------------------------
+Logistic Regression        0.619   0.111   0.576   0.186
+Random Forest              0.733   0.169   0.594   0.263
+LightGBM ?                 0.759   0.170   0.679   0.272
+? Selected for XAI analysis (highest AUC, native TreeSHAP)
+  [CHECKPOINT] model_performance.json saved.
+
+=================================================================
+STEP 3: PREPARING SHARED SAMPLES  (n=1000 for both SHAP and LIME)
+=================================================================
+Main sample — raw NaN: 27660
+Main sample — filled NaN: 0
+
+=================================================================
+STEP 4: SHAP ANALYSIS  (n=1000, TreeSHAP)
+=================================================================
+SHAP values shape: (1000, 120)
+
+C1 Coverage:       0.7002 ± 0.0623
+
+C2 Consistency (10 runs × 100 instances)...
+  Run 1/10
+  Run 2/10
+  Run 3/10
+  Run 4/10
+  Run 5/10
+  Run 6/10
+  Run 7/10
+  Run 8/10
+  Run 9/10
+  Run 10/10
+C2 Consistency:    1.0000 ± 0.0000
+C3a Complexity:    0.5360 ± 0.0107
+C4 Bias gap:       0.2696  groups: {0: -0.09509522756523354, 1: 0.17449721913845728}
+C5 Disparity:      0.2163  rates: {0: 0.739193083573487, 1: 0.5228758169934641}
+  [CHECKPOINT] shap_results.json saved.
+
+=================================================================
+STEP 5: LIME ANALYSIS  (n=1000 — this is the slow section ~2-4h)
+=================================================================
+
+Generating 1000 LIME explanations...
+  0/1000  errors=0
+  100/1000  errors=0
+  200/1000  errors=0
+  300/1000  errors=0
+  400/1000  errors=0
+  500/1000  errors=0
+  600/1000  errors=0
+  700/1000  errors=0
+  800/1000  errors=0
+  900/1000  errors=0
+Successful: 1000/1000  errors: 0
+
+C1 Fidelity R²:    0.2506 ± 0.1345
+
+C2 Consistency (10 stochastic runs × 100 instances)...
+  Stochastic run 1/10...
+  Stochastic run 2/10...
+  Stochastic run 3/10...
+  Stochastic run 4/10...
+  Stochastic run 5/10...
+  Stochastic run 6/10...
+  Stochastic run 7/10...
+  Stochastic run 8/10...
+  Stochastic run 9/10...
+  Stochastic run 10/10...
+C2 Consistency:    0.3813 ± 0.1143
+C3a Complexity:    1.0438 ± 0.0104
+C4 Bias gap:       0.007925  groups: {1: 0.004155349642311582, 0: -0.0037691632808211943}
+   Gender appear:  75/1000 (7.5%)
+C5 Disparity:      0.2163  (model-level, same as SHAP)
+  [CHECKPOINT] lime_results.json saved.
+
+=================================================================
+STEP 6: KERNEL WIDTH SWEEP  (~45 min)
+=================================================================
+Default kernel width: sqrt(120) × 0.75 = 8.2158
+
+  Kernel ×0.25  (width=2.054)...
+    R² = 0.2790 ± 0.1569
+
+  Kernel ×0.5  (width=4.108)...
+    R² = 0.2562 ± 0.1461
+
+  Kernel ×0.75  (width=6.162)...
+    R² = 0.2560 ± 0.1444
+
+  Kernel ×1.0  (width=8.216)...
+    R² = 0.2555 ± 0.1441
+
+  Kernel ×1.5  (width=12.324)...
+    R² = 0.2553 ± 0.1439
+
+  Kernel ×2.0  (width=16.432)...
+    R² = 0.2554 ± 0.1440
+
+  Kernel ×3.0  (width=24.648)...
+    R² = 0.2554 ± 0.1439
+
+R² range: 0.2553 – 0.2790
+  [CHECKPOINT] kernel_sweep_results.json saved.
+
+=================================================================
+STEP 7: FIXED-SEED LIME CONSISTENCY  (~40 min)
+=================================================================
+A FRESH explainer is created each run — RNG resets to same seed,
+so runs are truly independent and deterministic.
+
+  Fixed-seed run 1/10...
+  Fixed-seed run 2/10...
+  Fixed-seed run 3/10...
+  Fixed-seed run 4/10...
+  Fixed-seed run 5/10...
+  Fixed-seed run 6/10...
+  Fixed-seed run 7/10...
+  Fixed-seed run 8/10...
+  Fixed-seed run 9/10...
+  Fixed-seed run 10/10...
+
+Fixed-seed LIME: 1.0000 ± 0.0000
+Stochastic LIME: 0.3813 ± 0.1143
+SHAP:            1.0000 ± 0.0000
+  [CHECKPOINT] fixed_seed_results.json saved.
+
+=================================================================
+STEP 8: CSF COMPLIANCE SCORING
+=================================================================
+
+Criterion                   SHAP   LIME       ?
+-----------------------------------------------
+C1 Coverage                  3.0    1.5    +1.5
+C2 Consistency               5.0    1.0    +4.0
+C3a Complexity               4.0    1.0    +3.0
+C3b Comprehension            2.0    4.0    -2.0
+C4 Bias                      5.0    2.0    +3.0
+C5 Fairness                  5.0    5.0    +0.0
+C6 Oversight                 4.0    3.5    +0.5
+C7 Auditability              5.0    2.0    +3.0
+-----------------------------------------------
+Overall                     4.12   2.50   +1.62
+
+Mann-Whitney U (per-instance Jaccard): U=20250000, p=0.00e+00
+  [CHECKPOINT] csf_scores.json saved.
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_2460/1437486616.py in <cell line: 0>()
+    775 
+    776 ax.plot(
+--> 777     km, rm, "o-",
+    778     color=LIME_COL,
+    779     linewidth=2.2,
+
+NameError: name 'km' is not defined
+
+
+/////////////////////////////////////////
+SHAP_COL  = '#1F4E79'
+LIME_COL  = '#C55A11'
+FIXED_COL = '#2E75B6'
+GRID_COL  = '#E8E8E8'
+
+plt.rcParams.update({
+    'font.family':      'DejaVu Sans',
+    'font.size':        9,
+    'axes.titlesize':   10,
+    'axes.titleweight': 'bold',
+    'axes.labelsize':   9,
+    'axes.spines.top':  False,
+    'axes.spines.right':False,
+    'figure.facecolor': 'white',
+    'axes.facecolor':   'white',
+    'axes.grid':        True,
+    'grid.color':       GRID_COL,
+    'grid.linewidth':   0.7,
+})
+
+# -----------------------------------------------------------------------------
+# FIG 1 — Kernel Width Sensitivity
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("GENERATING FIGURES")
+print("=" * 65)
+
+km = [float(k) for k in kernel_results.keys()]
+rm = [kernel_results[k]['r2_mean'] for k in kernel_results]
+rs = [kernel_results[k]['r2_std']  for k in kernel_results]
+
+fig, ax = plt.subplots(figsize=(7, 3.8))
+ax.plot(km, rm, 'o-', color=LIME_COL, linewidth=2.2,
+        markersize=6, markerfacecolor=LIME_COL,
+        markeredgecolor='white', markeredgewidth=1.2, zorder=3)
+ax.fill_between(km,
+                [m - s for m, s in zip(rm, rs)],
+                [m + s for m, s in zip(rm, rs)],
+                color=LIME_COL, alpha=0.15, zorder=2)
+
+# Threshold lines - positioned better
+for thresh, lbl, ls in [(0.65, 'Score-3', '--'),
+                         (0.55, 'Score-2', ':')]:
+    ax.axhline(thresh, color='#888888', linewidth=1.1, linestyle=ls, alpha=0.6)
+    ax.text(0.22, thresh - 0.012, lbl, fontsize=7.5, color='#666666',
+            va='top', ha='left')
+
+# Default marker
+di = km.index(1.0)
+ax.scatter([km[di]], [rm[di]], s=90, zorder=5, color=LIME_COL,
+           edgecolors='black', linewidths=1.2)
+ax.annotate(f'Default\nR²={rm[di]:.4f}',
+            xy=(km[di], rm[di]), xytext=(1.35, 0.282),
+            fontsize=8, color='#444444',
+            arrowprops=dict(arrowstyle='->', color='#888888', lw=0.9),
+            ha='left')
+
+# Value labels on points
+for m, r in zip(km, rm):
+    ax.text(m, r + 0.016, f'{r:.4f}',
+            ha='center', fontsize=7.5, color=LIME_COL, fontweight='bold')
+
+# Range annotation - positioned higher
+r_min, r_max = min(rm), max(rm)
+ax.annotate('', xy=(km[-1], r_max + 0.055), xytext=(km[0], r_max + 0.055),
+            arrowprops=dict(arrowstyle='<->', color='#555555', lw=1.0))
+ax.text(np.mean([km[0], km[-1]]), r_max + 0.068,
+        f'Range {r_min:.4f}–{r_max:.4f} across {int(km[-1]/km[0])}× kernel range',
+        ha='center', fontsize=8, color='#444444', style='italic')
+
+ax.set_xlabel('Kernel Width Multiplier (×default)', fontsize=9)
+ax.set_ylabel('Local Fidelity R²', fontsize=9)
+# Shortened title
+ax.set_title(
+    f'Fig. 1. Kernel Width Sensitivity Analysis (n={SWEEP_N} per config)',
+    fontsize=10, fontweight='bold', pad=10)
+ax.set_xticks(km)
+ax.set_xticklabels([f'×{m}' for m in km])
+ax.set_ylim(0.24, r_max + 0.11)
+plt.tight_layout()
+plt.savefig('fig1_kernel_sweep.png', dpi=300, bbox_inches='tight')
+plt.savefig('fig1_kernel_sweep.pdf', bbox_inches='tight')
+plt.close()
+print("  fig1_kernel_sweep.png/.pdf saved")
+
+# -----------------------------------------------------------------------------
+# FIG 2 — C2+C7 Consistency
+# -----------------------------------------------------------------------------
+fig, ax = plt.subplots(figsize=(6, 4))
+cats       = ['SHAP\n(deterministic)', 'LIME\n(fixed seed)', 'LIME\n(stochastic)']
+means_bar  = [shap_c2_mean, fixed_c2_mean, lime_c2_mean]
+stds_bar   = [shap_c2_std,  fixed_c2_std,  lime_c2_std]
+cols_bar   = [SHAP_COL, FIXED_COL, LIME_COL]
+
+bars = ax.bar(cats, means_bar, color=cols_bar,
+              width=0.5, edgecolor='white', zorder=3)
+ax.errorbar(range(3), means_bar, yerr=stds_bar,
+            fmt='none', color='#555555', capsize=5,
+            capthick=1.5, elinewidth=1.5, zorder=4)
+
+max_err = max(stds_bar)
+for bar, val in zip(bars, means_bar):
+    ax.text(bar.get_x() + bar.get_width() / 2,
+            bar.get_height() + max_err + 0.022,
+            f'J = {val:.3f}', ha='center', fontsize=9, fontweight='bold')
+
+ax.axhline(0.95, color='green',  linestyle='--', linewidth=1.2,
+           alpha=0.8, label='Score-5 (J=0.95)', zorder=2)
+ax.axhline(0.75, color='orange', linestyle=':',  linewidth=1.2,
+           alpha=0.8, label='Score-3 (J=0.75)', zorder=2)
+
+# Repositioned annotation to avoid legend
+ax.annotate('Requires per-instance\nseed management',
+            xy=(1, fixed_c2_mean),
+            xytext=(1.55, fixed_c2_mean + 0.18),
+            fontsize=7.5, color=FIXED_COL, style='italic',
+            arrowprops=dict(arrowstyle='->', color=FIXED_COL, lw=0.9),
+            ha='center')
+
+ax.set_ylabel('Jaccard Similarity (J)', fontsize=9)
+ax.set_ylim(0, 1.25)
+# Shortened title
+ax.set_title(
+    f'Fig. 2. C2+C7 Consistency: Jaccard Similarity\n'
+    f'SHAP: J={shap_c2_mean:.3f}, Fixed-seed LIME: J={fixed_c2_mean:.3f}, '
+    f'Stochastic LIME: J={lime_c2_mean:.3f}±{lime_c2_std:.3f}',
+    fontsize=9.5, fontweight='bold', pad=10)
+ax.legend(fontsize=7.5, loc='upper left', framealpha=0.9)
+plt.tight_layout()
+plt.savefig('fig2_consistency.png', dpi=300, bbox_inches='tight')
+plt.savefig('fig2_consistency.pdf', bbox_inches='tight')
+plt.close()
+print("  fig2_consistency.png/.pdf saved")
+
+# -----------------------------------------------------------------------------
+# FIG 3 — C4 Bias Detection
+# -----------------------------------------------------------------------------
+fig, axes = plt.subplots(1, 2, figsize=(8, 3.8))
+fig.suptitle('Fig. 3. C4 Bias Detection', fontweight='bold', fontsize=11, y=0.98)
+
+# Panel A
+ax1 = axes[0]
+fold = (shap_c4_gap / lime_c4_gap) if lime_c4_gap > 0 else float('inf')
+gap_bars = ax1.bar(['SHAP', 'LIME'], [shap_c4_gap, lime_c4_gap],
+                   color=[SHAP_COL, LIME_COL], width=0.45, edgecolor='white')
+for i, (bar, val) in enumerate(zip(gap_bars, [shap_c4_gap, lime_c4_gap])):
+    if i == 1:  # LIME bar - shift label to the left
+        ax1.text(bar.get_x() + bar.get_width() / 2 - 0.25,
+                 bar.get_height() + 0.006,
+                 f'?={val:.4f}', ha='center', fontsize=8.5, fontweight='bold')
+    else:  # SHAP bar - center
+        ax1.text(bar.get_x() + bar.get_width() / 2,
+                 bar.get_height() + 0.006,
+                 f'?={val:.4f}', ha='center', fontsize=8.5, fontweight='bold')
+
+# Repositioned fold annotation
+ax1.annotate('', xy=(1, lime_c4_gap + 0.002), xytext=(0, shap_c4_gap - 0.002),
+             arrowprops=dict(arrowstyle='<->', color='#555555', lw=1.1))
+ax1.text(0.5, (shap_c4_gap + lime_c4_gap) / 2 + 0.02,
+         f'{fold:.0f}× gap', ha='center', va='center',
+         fontsize=8, color='#555555', style='italic',
+         bbox=dict(boxstyle='round,pad=0.3', facecolor='white',
+                   edgecolor='#CCCCCC', alpha=0.95))
+
+ax1.set_xticks([0, 1])
+ax1.set_xticklabels([
+    f'SHAP\n(score: {shap_scores["C4_Bias"]:.1f}/5)',
+    f'LIME\n(score: {lime_scores["C4_Bias"]:.1f}/5)'])
+ax1.set_ylabel('|f¯_group1 - f¯_group2|  (signed means)', fontsize=8.5)
+ax1.set_title(f'(A) Attribution Gap:\nSHAP ?={shap_c4_gap:.4f} vs. LIME ?={lime_c4_gap:.4f}',
+              fontsize=9, pad=8)
+ax1.set_ylim(0, shap_c4_gap * 1.35)
+
+# Panel B
+ax2 = axes[1]
+lime_appear_pct = lime_gender_appear_rate * 100
+lime_absent_pct = 100.0 - lime_appear_pct
+
+ax2.bar([0], [100.0], color=SHAP_COL, width=0.45, edgecolor='white')
+ax2.text(0, 50, f'100%\n(all {SAMPLE_N}\ninstances)',
+         ha='center', va='center', color='white', fontsize=8.5, fontweight='bold')
+
+# Fixed overlapping text in LIME bar
+ax2.bar([1], [lime_appear_pct], color=LIME_COL, width=0.45, edgecolor='white')
+ax2.bar([1], [lime_absent_pct], bottom=[lime_appear_pct],
+        color='#F5C6A0', width=0.45, edgecolor='white')
+
+# Better positioned text labels
+if lime_appear_pct > 10:  # Only show if there's space
+    ax2.text(1, lime_appear_pct / 2,
+             f'{lime_appear_pct:.1f}%\n({gender_appearances}/{n_lime})',
+             ha='center', va='center', color='white', fontsize=7.5, fontweight='bold')
+ax2.text(1, lime_appear_pct + lime_absent_pct / 2,
+         f'{lime_absent_pct:.1f}%\nNo signal',
+         ha='center', va='center', color='#7B3200', fontsize=8.5, fontweight='bold')
+
+ax2.set_xticks([0, 1])
+ax2.set_xticklabels(['SHAP\n(unconditional)', 'LIME\n(selective)'])
+ax2.set_ylabel('% of Instances', fontsize=8.5)
+ax2.set_ylim(0, 125)
+# Shortened title
+ax2.set_title(f'(B) Gender Appearance Rate:\nSHAP 100%, LIME {lime_appear_pct:.1f}%',
+              fontsize=9, pad=8)
+ax2.legend(handles=[
+    mpatches.Patch(color=SHAP_COL,  label='Gender attributed (SHAP)'),
+    mpatches.Patch(color=LIME_COL,  label='Gender in top-10 (LIME)'),
+    mpatches.Patch(color='#F5C6A0', label='Gender absent'),
+], fontsize=6.5, loc='upper right', framealpha=0.95)
+
+plt.tight_layout()
+plt.savefig('fig3_bias_detection.png', dpi=300, bbox_inches='tight')
+plt.savefig('fig3_bias_detection.pdf', bbox_inches='tight')
+plt.close()
+print("  fig3_bias_detection.png/.pdf saved")
+
+# -----------------------------------------------------------------------------
+# FIG 4 — Compliance Radar Chart
+# -----------------------------------------------------------------------------
+radar_labels = [
+    'C1\nCoverage', 'C2\nConsistency', 'C3a\nComplexity',
+    'C3b\nComprehension', 'C4\nBias', 'C5\nFairness',
+    'C6\nOversight', 'C7\nAuditability'
+]
+N      = len(radar_labels)
+angles = [n / float(N) * 2 * pi for n in range(N)]
+angles += angles[:1]
+s_vals = list(shap_scores.values()) + [list(shap_scores.values())[0]]
+l_vals = list(lime_scores.values())  + [list(lime_scores.values())[0]]
+
+fig, ax = plt.subplots(figsize=(6.5, 6.5), subplot_kw=dict(polar=True))
+fig.patch.set_facecolor('white')
+ax.plot(angles, s_vals, 'o-', linewidth=2.2, color=SHAP_COL,
+        label=f'SHAP ({shap_overall:.2f}/5.00)', markersize=6)
+ax.fill(angles, s_vals, alpha=0.18, color=SHAP_COL)
+ax.plot(angles, l_vals, 's-', linewidth=2.2, color=LIME_COL,
+        label=f'LIME ({lime_overall:.2f}/5.00)', markersize=6)
+ax.fill(angles, l_vals, alpha=0.18, color=LIME_COL)
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(radar_labels, fontsize=9)
+
+# Manually adjust horizontal alignment for specific labels to avoid overlap
+tick_labels = ax.get_xticklabels()
+tick_labels[0].set_ha('left')      # C1 Coverage - align left (move right)
+tick_labels[1].set_ha('left')      # C2 Consistency - align left (move right)
+tick_labels[3].set_ha('right')     # C3b Comprehension - align right (move left)
+
+ax.set_ylim(0, 5)
+ax.set_yticks([1, 2, 3, 4, 5])
+ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7.5)
+# Shortened title
+ax.set_title(
+    'Fig. 4. CSF Compliance Radar Chart\n'
+    'SHAP dominates regulatory dimensions; LIME leads on user comprehensibility (C3b)',
+    fontsize=10, fontweight='bold', pad=28)
+# Repositioned legend
+ax.legend(loc='upper right', bbox_to_anchor=(1.28, 1.08), fontsize=9, framealpha=0.95)
+plt.tight_layout()
+plt.savefig('fig4_radar_chart.png', dpi=300, bbox_inches='tight')
+plt.savefig('fig4_radar_chart.pdf', bbox_inches='tight')
+plt.close()
+print("  fig4_radar_chart.png/.pdf saved")
+
+
+# -----------------------------------------------------------------------------
+# FINAL SUMMARY
+# -----------------------------------------------------------------------------
+print("\n" + "=" * 65)
+print("FINAL RESULTS — COPY THESE INTO YOUR PAPER")
+print("=" * 65)
+print(f"""
+MODEL PERFORMANCE (Table I):
+  Logistic Regression  AUC={lr_auc:.3f}  Prec={lr_prec:.3f}  Rec={lr_rec:.3f}  F1={lr_f1:.3f}
+  Random Forest        AUC={rf_auc:.3f}  Prec={rf_prec:.3f}  Rec={rf_rec:.3f}  F1={rf_f1:.3f}
+  LightGBM ?           AUC={lgb_auc:.3f}  Prec={lgb_prec:.3f}  Rec={lgb_rec:.3f}  F1={lgb_f1:.3f}
+
+CSF RAW METRICS:
+  SHAP C1 Coverage:         {shap_c1_mean:.3f} ± {shap_c1_std:.3f}
+  LIME C1 Fidelity R²:      {lime_c1_mean:.3f} ± {lime_c1_std:.3f}
+  Kernel R² range:          {min(r2_all):.4f} – {max(r2_all):.4f}
+
+  SHAP C2 Jaccard:          {shap_c2_mean:.3f} ± {shap_c2_std:.3f}
+  LIME C2 Jaccard (stoch):  {lime_c2_mean:.3f} ± {lime_c2_std:.3f}
+  LIME C2 Jaccard (fixed):  {fixed_c2_mean:.3f} ± {fixed_c2_std:.3f}
+  Mann-Whitney U={u_stat:.0f}, p={p_mw:.2e}
+
+  SHAP C3a Complexity:      {shap_c3a_mean:.3f} ± {shap_c3a_std:.3f}
+  LIME C3a Complexity:      {lime_c3a_mean:.3f} ± {lime_c3a_std:.3f}
+
+  SHAP C4 Bias gap:         {shap_c4_gap:.4f}  groups={shap_group_means}
+  LIME C4 Bias gap:         {lime_c4_gap:.6f}  groups={lime_group_means}
+  Fold difference:          {shap_c4_gap/lime_c4_gap if lime_c4_gap>0 else 'inf':.1f}×
+  LIME gender appear rate:  {lime_gender_appear_rate*100:.1f}%
+  LIME gender absent:       {(1-lime_gender_appear_rate)*100:.1f}%
+
+  C5 Approval rates:        {shap_approval}
+  C5 Disparity:             {shap_c5_disp:.3f}
+
+CSF COMPLIANCE SCORES (Table IV):
+  SHAP overall: {shap_overall:.2f}/5.00
+  LIME overall: {lime_overall:.2f}/5.00
+  Difference:   {shap_overall - lime_overall:.2f}
+
+OUTPUT FILES:
+  model_performance.json
+  shap_results.json  |  lime_results.json
+  kernel_sweep_results.json  |  fixed_seed_results.json
+  csf_scores.json
+  fig1_kernel_sweep.png/.pdf
+  fig2_consistency.png/.pdf
+  fig3_bias_detection.png/.pdf
+  fig4_radar_chart.png/.pdf
+""")
+print("=" * 65)
+print("ALL STEPS COMPLETE.")
+print("=" * 65)
+
+result:
+
+=================================================================
+GENERATING FIGURES
+=================================================================
+  fig1_kernel_sweep.png/.pdf saved
+  fig2_consistency.png/.pdf saved
+  fig3_bias_detection.png/.pdf saved
+  fig4_radar_chart.png/.pdf saved
+
+=================================================================
+FINAL RESULTS — COPY THESE INTO YOUR PAPER
+=================================================================
+
+MODEL PERFORMANCE (Table I):
+  Logistic Regression  AUC=0.619  Prec=0.111  Rec=0.576  F1=0.186
+  Random Forest        AUC=0.733  Prec=0.169  Rec=0.594  F1=0.263
+  LightGBM ?           AUC=0.759  Prec=0.170  Rec=0.679  F1=0.272
+
+CSF RAW METRICS:
+  SHAP C1 Coverage:         0.700 ± 0.062
+  LIME C1 Fidelity R²:      0.251 ± 0.135
+  Kernel R² range:          0.2553 – 0.2790
+
+  SHAP C2 Jaccard:          1.000 ± 0.000
+  LIME C2 Jaccard (stoch):  0.381 ± 0.114
+  LIME C2 Jaccard (fixed):  1.000 ± 0.000
+  Mann-Whitney U=20250000, p=0.00e+00
+
+  SHAP C3a Complexity:      0.536 ± 0.011
+  LIME C3a Complexity:      1.044 ± 0.010
+
+  SHAP C4 Bias gap:         0.2696  groups={0: -0.09509522756523354, 1: 0.17449721913845728}
+  LIME C4 Bias gap:         0.007925  groups={1: 0.004155349642311582, 0: -0.0037691632808211943}
+  Fold difference:          34.0×
+  LIME gender appear rate:  7.5%
+  LIME gender absent:       92.5%
+
+  C5 Approval rates:        {0: 0.739193083573487, 1: 0.5228758169934641}
+  C5 Disparity:             0.216
+
+CSF COMPLIANCE SCORES (Table IV):
+  SHAP overall: 4.12/5.00
+  LIME overall: 2.50/5.00
+  Difference:   1.62
+
+OUTPUT FILES:
+  model_performance.json
+  shap_results.json  |  lime_results.json
+  kernel_sweep_results.json  |  fixed_seed_results.json
+  csf_scores.json
+  fig1_kernel_sweep.png/.pdf
+  fig2_consistency.png/.pdf
+  fig3_bias_detection.png/.pdf
+  fig4_radar_chart.png/.pdf
+
+=================================================================
+ALL STEPS COMPLETE.
+=================================================================
+/////////////////////////////////////////////////////////
+# -----------------------------------------------------------------------------
+# WEIGHT SENSITIVITY ANALYSIS (Monte Carlo)
+# -----------------------------------------------------------------------------
+
+print("\n" + "=" * 65)
+print("WEIGHT SENSITIVITY ANALYSIS (Monte Carlo)")
+print("=" * 65)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Manually construct score vectors in identical order
+shap_vector = np.array([
+    shap_scores['C1_Coverage'],
+    shap_scores['C2_Consistency'],
+    shap_scores['C3a_Complexity'],
+    shap_scores['C3b_Comprehension'],
+    shap_scores['C4_Bias'],
+    shap_scores['C5_Fairness'],
+    shap_scores['C6_Oversight'],
+    shap_scores['C7_Auditability']
+])
+
+lime_vector = np.array([
+    lime_scores['C1_Fidelity'],   # note difference here
+    lime_scores['C2_Consistency'],
+    lime_scores['C3a_Complexity'],
+    lime_scores['C3b_Comprehension'],
+    lime_scores['C4_Bias'],
+    lime_scores['C5_Fairness'],
+    lime_scores['C6_Oversight'],
+    lime_scores['C7_Auditability']
+])
+
+n_sim = 3000  # stronger robustness
+
+weights = np.random.dirichlet(np.ones(8), size=n_sim)
+
+shap_wins = 0
+score_differences = []
+
+for w in weights:
+    shap_score = np.dot(w, shap_vector)
+    lime_score = np.dot(w, lime_vector)
+    score_differences.append(shap_score - lime_score)
+    if shap_score > lime_score:
+        shap_wins += 1
+
+robustness_ratio = shap_wins / n_sim
+
+print(f"\nOut of {n_sim} random weight configurations:")
+print(f"  SHAP ranked higher in {shap_wins} cases")
+print(f"  Robustness ratio: {robustness_ratio:.4f}")
+
+plt.figure(figsize=(6,4))
+plt.hist(score_differences, bins=40, edgecolor='black')
+plt.axvline(0, color='red', linestyle='--')
+plt.title('Distribution of (SHAP score - LIME score)')
+plt.xlabel('Score Difference')
+plt.ylabel('Frequency')
+plt.tight_layout()
+plt.savefig('fig_weight_sensitivity.png', dpi=300)
+plt.close()
+
+print("  fig_weight_sensitivity.png saved")
+
+# -----------------------------------------------------------------------------
+# THRESHOLD PERTURBATION TEST (±10%)
+# -----------------------------------------------------------------------------
+
+print("\n" + "=" * 65)
+print("THRESHOLD PERTURBATION TEST (±10%)")
+print("=" * 65)
+
+# Original metric values
+metrics_shap = {
+    'C1': shap_c1_mean,
+    'C2': shap_c2_mean,
+    'C3a': shap_c3a_mean,
+    'C4': shap_c4_gap,
+    'C5': shap_c5_disp
+}
+
+metrics_lime = {
+    'C1': lime_c1_mean,
+    'C2': lime_c2_mean,
+    'C3a': lime_c3a_mean,
+    'C4': lime_c4_gap,
+    'C5': lime_c5_disp
+}
+
+# Create small perturbation factor
+perturbation = 0.10  # ±10%
+
+def perturb_threshold(value, factor, direction):
+    if direction == "up":
+        return value * (1 + factor)
+    else:
+        return value * (1 - factor)
+
+# Test both upward and downward threshold shifts
+results = []
+
+for direction in ["up", "down"]:
+    shap_score = 0
+    lime_score = 0
+
+    # Recompute scoring using slightly shifted thresholds
+    shap_score += score_coverage(perturb_threshold(shap_c1_mean, perturbation, direction))
+    lime_score += score_fidelity(perturb_threshold(lime_c1_mean, perturbation, direction))
+
+    shap_score += score_jaccard(perturb_threshold(shap_c2_mean, perturbation, direction))
+    lime_score += score_jaccard(perturb_threshold(lime_c2_mean, perturbation, direction))
+
+    shap_score += score_complexity(perturb_threshold(shap_c3a_mean, perturbation, direction))
+    lime_score += score_complexity(perturb_threshold(lime_c3a_mean, perturbation, direction))
+
+    shap_score += score_bias_gap(perturb_threshold(shap_c4_gap, perturbation, direction))
+    lime_score += score_bias_gap(perturb_threshold(lime_c4_gap, perturbation, direction))
+
+    shap_score += score_disparity(perturb_threshold(shap_c5_disp, perturbation, direction))
+    lime_score += score_disparity(perturb_threshold(lime_c5_disp, perturbation, direction))
+
+    shap_overall_test = shap_score / 5
+    lime_overall_test = lime_score / 5
+
+    results.append({
+        "direction": direction,
+        "shap_score": shap_overall_test,
+        "lime_score": lime_overall_test,
+        "shap_wins": shap_overall_test > lime_overall_test
+    })
+
+print("\nThreshold Perturbation Results:")
+for r in results:
+    print(r)
+result:
+=================================================================
+WEIGHT SENSITIVITY ANALYSIS (Monte Carlo)
+=================================================================
+
+Out of 3000 random weight configurations:
+  SHAP ranked higher in 2971 cases
+  Robustness ratio: 0.9903
+  fig_weight_sensitivity.png saved
+
+=================================================================
+THRESHOLD PERTURBATION TEST (±10%)
+=================================================================
+
+Threshold Perturbation Results:
+{'direction': 'up', 'shap_score': 4.2, 'lime_score': 2.1, 'shap_wins': True}
+{'direction': 'down', 'shap_score': 4.0, 'lime_score': 2.1, 'shap_wins': True}

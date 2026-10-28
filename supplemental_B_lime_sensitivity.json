@@ -1,0 +1,78 @@
+{
+  "sample_size": {
+    "250": {
+      "r2_mean": 0.2731409128960242,
+      "r2_std": 0.14957850923369764,
+      "complexity_mean": 1.0575733333333333,
+      "gender_appear_rate": 0.06666666666666667,
+      "n_success": 150
+    },
+    "500": {
+      "r2_mean": 0.25085630085551497,
+      "r2_std": 0.14471583263599566,
+      "complexity_mean": 1.0511333333333335,
+      "gender_appear_rate": 0.05333333333333334,
+      "n_success": 150
+    },
+    "1000": {
+      "r2_mean": 0.24760433811731322,
+      "r2_std": 0.13726804243836746,
+      "complexity_mean": 1.043946666666667,
+      "gender_appear_rate": 0.10666666666666667,
+      "n_success": 150
+    },
+    "2000": {
+      "r2_mean": 0.2413583492378965,
+      "r2_std": 0.14028918497277287,
+      "complexity_mean": 1.0394600000000003,
+      "gender_appear_rate": 0.16,
+      "n_success": 150
+    }
+  },
+  "num_features": {
+    "5": {
+      "r2_mean": 0.25793588227579145,
+      "r2_std": 0.13205860871768824,
+      "complexity_mean": 0.6354133333333333,
+      "gender_appear_rate": 0.47333333333333333,
+      "n_success": 150
+    },
+    "10": {
+      "r2_mean": 0.24760433811731322,
+      "r2_std": 0.13726804243836746,
+      "complexity_mean": 1.043946666666667,
+      "gender_appear_rate": 0.10666666666666667,
+      "n_success": 150
+    },
+    "15": {
+      "r2_mean": 0.2837013836050807,
+      "r2_std": 0.13504195276463019,
+      "complexity_mean": 1.4523644444444448,
+      "gender_appear_rate": 0.4866666666666667,
+      "n_success": 150
+    },
+    "20": {
+      "r2_mean": 0.3067772653508005,
+      "r2_std": 0.13325599226056747,
+      "complexity_mean": 1.8580433333333333,
+      "gender_appear_rate": 0.76,
+      "n_success": 150
+    }
+  },
+  "discretization": {
+    "True": {
+      "r2_mean": 0.24760433811731322,
+      "r2_std": 0.13726804243836746,
+      "complexity_mean": 1.043946666666667,
+      "gender_appear_rate": 0.10666666666666667,
+      "n_success": 150
+    },
+    "False": {
+      "r2_mean": 0.5209266660886869,
+      "r2_std": 0.10000402608468723,
+      "complexity_mean": 0.5417,
+      "gender_appear_rate": 0.6066666666666667,
+      "n_success": 150
+    }
+  }
+}

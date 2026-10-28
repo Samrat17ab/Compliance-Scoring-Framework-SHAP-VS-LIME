@@ -1,0 +1,18 @@
+{
+  "reproduced_log_odds_gap": 0.27596531818867054,
+  "reproduced_log_odds_groups": {
+    "0": -0.09659068334961782,
+    "1": 0.1793746348390527
+  },
+  "linearized_prob_approx_gap": 0.05572335847811016,
+  "linearized_prob_approx_groups": {
+    "0": -0.018309635394383912,
+    "1": 0.03741372308372625
+  },
+  "exact_interventional_prob_gap": 0.03895052641214734,
+  "exact_interventional_prob_groups": {
+    "0": -0.014976011407805629,
+    "1": 0.023974515004341713
+  },
+  "lime_gap_for_reference": 0.0079
+}

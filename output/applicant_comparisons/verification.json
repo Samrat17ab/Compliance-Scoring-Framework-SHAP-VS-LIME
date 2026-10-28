@@ -1,0 +1,16 @@
+{
+  "cases": 4,
+  "accepted": 2,
+  "rejected": 2,
+  "png_dimensions": [
+    4800,
+    2700
+  ],
+  "pdf_pages": 4,
+  "model_predictions_verified": true,
+  "raw_filled_decisions_agree": true,
+  "shap_additivity_verified": true,
+  "lime_surrogate_reconstruction_verified": true,
+  "same_seed_repeats_verified": true,
+  "pdf_text_inside_page_bounds": true
+}

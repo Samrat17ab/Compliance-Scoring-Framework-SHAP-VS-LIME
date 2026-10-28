@@ -1,0 +1,19 @@
+*.py text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.cff text eol=lf
+*.svg text eol=lf
+# Evidence bytes are preserved so checksums are identical on all platforms.
+*.json -text
+*.npz binary
+*.pdf binary
+*.png binary
+*.txt -text
+*.tex -text
+*.csv -text
+*.html -text
+*.log -text
+output/** linguist-generated=true
+archive/** linguist-vendored=true
+fig*.svg linguist-generated=true
+assets/** linguist-documentation=true

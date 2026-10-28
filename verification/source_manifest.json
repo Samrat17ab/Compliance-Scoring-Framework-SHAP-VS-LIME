@@ -1,0 +1,16 @@
+{
+  "c1_ablation_recheck.py": "1ac8204a764d322e4e31bfc1e32d4c689bae06cb4abac62e317ae570c451b7cb",
+  "c1_threshold_ablation.py": "be13fd62a5768b18944bcec6605f01f9255b214e41d5db6ec5e6c7c0ba6b8616",
+  "csf_evaluation.py": "486938a9f57db801c10afd1fe572e28045e17818fd7962f72c7af5aaf0e8d83a",
+  "finalize_applicant_figures.py": "25c590ac1c8aeda7dbbd9688615d3c81ae0bd016223b28a3c473c426ca8db557",
+  "generate_applicant_comparisons.py": "03a4ad7977dfddc7cb6cd770bd176d8213b03b6c054d3289b955e5b331564b06",
+  "generate_corrected_figures.py": "f9ea7b1d4a2e9673018731465599d09e2968f8bebdd627269019e814f1ff9c71",
+  "generate_fig1_fig2.py": "dd580489e8ace1512e5d01c53eefccfc52e4c25dc082b236fe54c1a786e96f15",
+  "generate_fig1_fig2_exact.py": "5f438c15872b31dbf4e502a3dbc4a04811f821726a6415f55be518700ecc6590",
+  "generate_original_figs.py": "64df63c14c422183817c8c485559dc362cd5c6a8245a9c14f3e95161d5ce5600",
+  "paper_c3b_c6_evidence.py": "02a55deef059d3ef863cea84f7a93bdb05a5f0460d3d3bcf4ab54c1eeb73c4df",
+  "recompute_downstream.py": "8fb87b25eb94f309bf9121ff555a813238126e1d1c7b74f65684d778615b2787",
+  "rerun_analysis_C_fix.py": "3742bc9bf03ced52ff594c5b41aeee3f0ac1a912be9dcf5771020b657a1bebc0",
+  "rerun_supplemental.py": "4a51f79d4e23b8fb9cb5aa1388392ef5a4e1430ca45e075d676f7cf8ab2f4a62",
+  "verify_paper_c3b_c6_evidence.py": "f908ef1af18f1d966a336fa06fbc9d750f00f53396040993006c959aac27aa4c"
+}
